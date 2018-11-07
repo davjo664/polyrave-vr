@@ -41,9 +41,13 @@ export class Main {
         this.render()
 
         // POLY REST API
+        /*
         let randomAssets = ['7Rr7j8S0q6C','fsUd856ZJZM']
         let poly = new Poly(randomAssets[Math.floor(Math.random()*randomAssets.length)]);
         this.scene.add( poly );
+        */
+
+        this.scene.addStage(30, 2);
 
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';

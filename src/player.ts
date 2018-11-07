@@ -6,6 +6,9 @@ export class Player extends THREE.Object3D {
         super();
         scene.add( this );
         this.add( camera );
+
+        this.position.set( 5, 5, 20 );
+        this.lookAt( 0, 1, 40 );
     }
 
     update() {
