@@ -32,9 +32,10 @@ export class Scene extends THREE.Scene {
         this.add( sky );
 
         // Add ground
-        const groundGeometry = new THREE.BoxGeometry(100, 0.5, 100);
+        const groundGeometry = new THREE.BoxGeometry(120, 0.5, 120);
         let groundMaterial = new THREE.MeshBasicMaterial( {color: 'gray'} );
         let groundMesh = new THREE.Mesh( groundGeometry, groundMaterial );
+        groundMesh.translateY(-0.5);
         this.add(groundMesh);
 
     }

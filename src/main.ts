@@ -7,6 +7,7 @@ import { Camera } from './camera';
 import { Scene } from './scene';
 import { Poly } from './poly';
 import { Player } from './player';
+import { PositionalAudio } from './positional-audio';
 
 export class Main {
     private scene: Scene;
@@ -14,6 +15,8 @@ export class Main {
     private renderer: Renderer;
     private container: any;
     private player: Player;
+    private positionalAudioLeft: PositionalAudio;
+    private positionalAudioRight: PositionalAudio;   
     constructor(container) {
 
         // // the HTML container
@@ -31,6 +34,10 @@ export class Main {
 
         this.player = new Player(this.scene, this.camera);
 
+        this.positionalAudioLeft = new PositionalAudio(this.scene, this.camera, 'test.wav', [15, 3, 40]);
+        this.positionalAudioRight = new PositionalAudio(this.scene, this.camera, 'test.wav', [-15, 3, 40]);
+
+
         // Initial size update set to canvas container
         this.updateSize();
 
@@ -47,7 +54,7 @@ export class Main {
         this.scene.add( poly );
         */
 
-        this.scene.addStage(30, 2);
+        this.scene.addStage(30, 1.5);
 
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
