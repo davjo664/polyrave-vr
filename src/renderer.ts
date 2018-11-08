@@ -5,8 +5,9 @@ export class Renderer extends THREE.WebGLRenderer
  {
     constructor(container) {
         // Initialize polyfill
+        // TODO: Set BUFFER_SCALE depending on device performance
         // @ts-ignore: Unreachable code error
-        new WebVRPolyfill();
+        new WebVRPolyfill({BUFFER_SCALE: 1});
         
         super({antialias: true});
 
