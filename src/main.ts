@@ -70,6 +70,16 @@ export class Main {
 
         container.addEventListener( 'mousemove', (event) => this.onMouseMove(event), false );
 
+        // For testing in browser
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                this.camera.rotation.y += 0.5
+            }
+            else if (event.key === "ArrowRight") {
+                this.camera.rotation.y -= 0.5
+            }
+        });
+
         // POLY REST API
         /*
         let randomAssets = ['7Rr7j8S0q6C','fsUd856ZJZM']
