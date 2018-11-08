@@ -20,6 +20,7 @@ export class PositionalAudio {
                 // set the audio object buffer to the loaded object
                 audio.setBuffer( audioBuffer );
                 audio.setRefDistance( 20 );
+                audio.setLoop(true);
                 audio.play();
             },
             function ( xhr ) {
