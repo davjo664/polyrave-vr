@@ -1,19 +1,22 @@
 // three.js
 import * as THREE from 'three'
+import * as TWEEN from '@tweenjs/tween.js';
 
 export class Player extends THREE.Object3D {
+    private newPos: THREE.Vector3 = new THREE.Vector3(0,0,0);
     constructor(scene, camera) {
         super();
         scene.add( this );
         this.add( camera );
+        this.lookAt( 0, 0, -1 );
+    }
 
-        this.position.set( 5, 5, 20 );
-        this.lookAt( 0, 1, 40 );
+    setEndPos(newPos: THREE.Vector3) {
+        this.newPos = newPos;
+        new TWEEN.Tween( this.position ).to( this.newPos, 2000 ).start();
     }
 
     update() {
-        var time = performance.now() / 5000;
-        this.position.x = Math.sin( time ) * 5;
-        this.position.z = Math.cos( time ) * 5;
+        TWEEN.update( performance.now());
     }
 }

@@ -36,6 +36,7 @@ export class Scene extends THREE.Scene {
         let groundMaterial = new THREE.MeshBasicMaterial( {color: 'gray'} );
         let groundMesh = new THREE.Mesh( groundGeometry, groundMaterial );
         groundMesh.translateY(-0.5);
+        groundMesh.name = "ground";
         this.add(groundMesh);
 
     }
