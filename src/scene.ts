@@ -25,7 +25,7 @@ export class Scene extends THREE.Scene {
 
         // Add sky base 
         const geometry = new THREE.SphereGeometry(sceneRadius, 32, 32, 0, Math.PI );
-        let skyMaterial = new THREE.MeshBasicMaterial( {color: 0x0000ff} );
+        let skyMaterial = new THREE.MeshLambertMaterial( {color: 0x0000ff} );
         let sky = new THREE.Mesh( geometry, skyMaterial );
         skyMaterial.side = THREE.BackSide;
         sky.rotateX(-Math.PI/2);
@@ -33,7 +33,7 @@ export class Scene extends THREE.Scene {
 
         // Add ground
         const groundGeometry = new THREE.BoxGeometry(120, 0.5, 120);
-        let groundMaterial = new THREE.MeshBasicMaterial( {color: 'gray'} );
+        let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray'} );
         let groundMesh = new THREE.Mesh( groundGeometry, groundMaterial );
         groundMesh.translateY(-0.5);
         groundMesh.name = "ground";
@@ -42,10 +42,10 @@ export class Scene extends THREE.Scene {
     }
 
     addStage = (width, height) => {
-        const geometry0 = new THREE.BoxGeometry(width, height, 5);
-        let baseMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+        const geometry0 = new THREE.CylinderGeometry(width + 0.5, width, height, 30, 5, false, 0);
+        let baseMaterial = new THREE.MeshLambertMaterial( {color: 0xffffff} );
         let stageBase = new THREE.Mesh( geometry0, baseMaterial );
-        stageBase.position.set(0, height/2, 40);
+        stageBase.position.set(0, height/2, 50);
 
         this.add(stageBase);
     }

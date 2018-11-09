@@ -9,6 +9,7 @@ import { Poly } from './poly';
 import { Player } from './player';
 import { PositionalAudio } from './positional-audio';
 import { BoxGeometry } from 'three';
+import { FOAmbisonics } from './ambient-audio';
 
 export class Main {
     private scene: Scene;
@@ -17,6 +18,7 @@ export class Main {
     private container: any;
     private player: Player;
     private positionalSceneAudio: PositionalAudio;
+    private ambientAudio: FOAmbisonics;
     private raycaster: THREE.Raycaster;
     private mouse: any = {x:0, y:0};
     private crosshair: THREE.Mesh;
@@ -42,7 +44,8 @@ export class Main {
 
         this.player = new Player(this.scene, this.camera);
 
-        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 30);
+        //this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 30);
+        //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
 
         this.raycaster = new THREE.Raycaster();
 
@@ -85,7 +88,7 @@ export class Main {
         this.scene.add( poly );
         */
 
-        this.scene.addStage(30, 1.5);
+        this.scene.addStage(25, 2);
 
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
