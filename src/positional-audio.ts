@@ -1,14 +1,15 @@
 import * as THREE from 'three'
 
-export class PositionalAudio {
-    constructor(scene, camera, audioName, position) {
+export class PositionalAudio { 
+    constructor(scene, camera, audioName, distance) {        
         
         // create an AudioListener and add it to the camera
         var listener = new THREE.AudioListener();
         camera.add( listener );
 
         // create the PositionalAudio object (passing in the listener)
-        var audio = new THREE.PositionalAudio( listener );
+        let audioLeft = new THREE.PositionalAudio( listener );
+        let audioRight = new THREE.PositionalAudio( listener );
 
         // load a sound and set it as the PositionalAudio object's buffer
         var audioLoader = new THREE.AudioLoader();
@@ -16,13 +17,17 @@ export class PositionalAudio {
         // load a resource
         audioLoader.load(
             '../assets/audio/' + audioName,
-            function ( audioBuffer ) {
+            (function ( audioBuffer ) {
                 // set the audio object buffer to the loaded object
-                audio.setBuffer( audioBuffer );
-                audio.setRefDistance( 20 );
-                audio.setLoop(true);
-                audio.play();
-            },
+                audioLeft.setBuffer( audioBuffer );
+                audioLeft.setRefDistance( 20 );
+                audioLeft.setLoop(true);
+                audioRight.setBuffer( audioBuffer );
+                audioRight.setRefDistance( 20 );
+                audioRight.setLoop(true);
+                audioLeft.play();
+                audioRight.play();
+            }),
             function ( xhr ) {
                 console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
             },
@@ -33,14 +38,20 @@ export class PositionalAudio {
 
         // create an object for the sound to play from
         // Make this transparent when positioning is complete
-        var sphere = new THREE.SphereGeometry( 1, 10, 10 );
-        var material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
-        var mesh = new THREE.Mesh( sphere, material );
-        mesh.position.set(position[0], position[1], position[2]);
-        scene.add( mesh );
+        let sphere = new THREE.SphereGeometry( 1, 10, 10 );
+        const material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
+        let leftSpeaker = new THREE.Mesh( sphere, material );
+        let rightSpeaker = new THREE.Mesh( sphere, material );
 
-        // Add the sound to the mesh
-        mesh.add( audio );
+        leftSpeaker.position.set(distance/2, 3, 40);
+        rightSpeaker.position.set(-distance/2, 3, 40);
+
+        scene.add( leftSpeaker );
+        scene.add( rightSpeaker );
+
+        // Add the sound to the meshes
+        leftSpeaker.add( audioLeft );
+        rightSpeaker.add( audioRight );
 
     }
 }

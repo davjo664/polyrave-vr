@@ -16,8 +16,7 @@ export class Main {
     private renderer: Renderer;
     private container: any;
     private player: Player;
-    private positionalAudioLeft: PositionalAudio;
-    private positionalAudioRight: PositionalAudio;
+    private positionalSceneAudio: PositionalAudio;
     private raycaster: THREE.Raycaster;
     private mouse: any = {x:0, y:0};
     private crosshair: THREE.Mesh;
@@ -43,8 +42,7 @@ export class Main {
 
         this.player = new Player(this.scene, this.camera);
 
-        this.positionalAudioLeft = new PositionalAudio(this.scene, this.camera, 'test.wav', [15, 3, 40]);
-        this.positionalAudioRight = new PositionalAudio(this.scene, this.camera, 'test.wav', [-15, 3, 40]);
+        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 30);
 
         this.raycaster = new THREE.Raycaster();
 
