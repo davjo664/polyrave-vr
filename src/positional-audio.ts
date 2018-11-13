@@ -43,8 +43,8 @@ export class PositionalAudio {
         let leftSpeaker = new THREE.Mesh( sphere, material );
         let rightSpeaker = new THREE.Mesh( sphere, material );
 
-        leftSpeaker.position.set(distance/2, 5, 40);
-        rightSpeaker.position.set(-distance/2, 5, 40);
+        leftSpeaker.position.set(-18, 6.5, distance/2 + 7);
+        rightSpeaker.position.set(-18, 6.5, -distance/2 + 7);
 
         scene.add( leftSpeaker );
         scene.add( rightSpeaker );

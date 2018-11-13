@@ -44,8 +44,9 @@ export class Main {
         this.camera = new Camera(aspectRatio);
 
         this.player = new Player(this.scene, this.camera);
+        this.player.position.y = 3;
 
-        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 35);
+        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 17);
         this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
 
         this.raycaster = new THREE.Raycaster();
@@ -95,23 +96,26 @@ export class Main {
         loader.load("../assets/models/scene.FBX", group => {
             
             console.log(group);
-            /*
-            group.children.forEach((child) => {
-                //console.log(child);
-                //if (child.type == 'Mesh') {
 
-                    child.scale.set(0.2, 0.2, 0.2);
-                    child.position.set(0,0,0);
-                    this.scene.add(child);
-                    console.log("added", child.name);
-                    // apply texture
-                    //child.material.map = texture
-                    //child.material.needsUpdate = true;
-                    
-                //}
+            group.children.forEach((child) => {
+                if (child.name == 'scenModel') {
+                    child.material.color = new THREE.Color(0.5, 0.5, 0.5);
+                    /*
+                    child.children.forEach((grandChild) => {
+                        grandChild.material.color = new THREE.Color(0.3, 0.3, 0.3);
+                    });
+                    */
+                } else if (child.name == 'markModel') {
+                    child.material.color = new THREE.Color(0, 0.2, 0);
+                }
+                else if (child.name.includes('stam')) {
+                    let crown = child.children[0];
+                    child.material.color = new THREE.Color(77/255, 38/255, 0);
+                    crown.material.color = new THREE.Color(0, 0.8, 0);
+                }
             });
-            */
             group.scale.set(0.1,0.1,0.1);
+            group.rotateY(0.16973888889 * Math.PI);
             this.scene.add(group);
             //objs.push({model, mixer});
         });

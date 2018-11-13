@@ -12,7 +12,7 @@ export class Scene extends THREE.Scene {
 
         this.background = new THREE.Color( 0x222222 );
 
-        this.add( new THREE.GridHelper( 100, 100 ) );
+        //this.add( new THREE.GridHelper( 100, 100 ) );
 
         // add lights
         let light = new THREE.DirectionalLight(0xffffff, 1.0)
