@@ -5,7 +5,7 @@ export class Scene extends THREE.Scene {
     constructor() {
         super();
 
-        const sceneRadius = 50;
+        const sceneRadius = 100;
         // add axis to the scene
         let axis = new THREE.AxesHelper(20)
         this.add(axis);
@@ -24,12 +24,17 @@ export class Scene extends THREE.Scene {
         this.add( ambient );
 
         // Add sky base 
-        const geometry = new THREE.SphereGeometry(sceneRadius, 32, 32, 0, Math.PI );
-        let skyMaterial = new THREE.MeshLambertMaterial( {color: 0x0000ff} );
-        let sky = new THREE.Mesh( geometry, skyMaterial );
-        skyMaterial.side = THREE.BackSide;
-        sky.rotateX(-Math.PI/2);
-        this.add( sky );
+        var geometry = new THREE.SphereBufferGeometry(sceneRadius,32,32, Math.PI );
+
+        // invert the geometry on the x-axis so that all of the faces point inward
+        geometry.scale( - 1, 1, 1 );
+        var material = new THREE.MeshBasicMaterial( {
+            map: new THREE.TextureLoader().load( '../assets/textures/sky.jpg' ) // equirectangular image
+        } );
+        // material.side = THREE.BackSide;
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.translateY(18);
+        this.add( mesh );
 
         // Add ground
         const groundGeometry = new THREE.BoxGeometry(120, 0.5, 120);
