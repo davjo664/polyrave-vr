@@ -5,8 +5,11 @@ export class VolumetricLight {
     private fragmentShader: any;
     private light: THREE.SpotLight = new THREE.SpotLight;
     private lightMesh: THREE.Mesh = new THREE.Mesh;
+    private animation: any;
 
-    constructor(scene, x, y, z, color) {
+    constructor(scene, x, y, z, color, animation) {
+
+        this.animation = animation;
 
         this.vertexShader = [
             'varying vec3 vNormal;',
@@ -97,7 +100,6 @@ export class VolumetricLight {
         mm.uniforms.lightColor.value.set( color );
         mm.uniforms.spotPosition.value	= this.lightMesh.position;
         scene.add( this.lightMesh );
-
         
         this.light = new THREE.SpotLight();
         this.light.position.copy(this.lightMesh.position);
@@ -113,8 +115,10 @@ export class VolumetricLight {
 
     update() {
         //Update direction of light beam
-        var angle = 0.05 * Math.PI * 2 * Date.now() / 100;
-		var target = new THREE.Vector3(4 * Math.cos(angle), 0, 4 * Math.sin(angle));
+        let angle = 0.05 * Math.PI * 2 * Date.now() / 100;
+        // Animate volumetric beams in circular motion
+        //var target = new THREE.Vector3(6 * Math.cos(angle), 0, 6 * Math.sin(angle));
+        let target = this.animation(angle);
 		this.lightMesh.lookAt(target);
         this.light.target.position.copy(target);
     }
