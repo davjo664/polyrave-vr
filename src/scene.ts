@@ -33,7 +33,7 @@ export class Scene extends THREE.Scene {
 
         // Add ground
         const groundGeometry = new THREE.BoxGeometry(120, 0.5, 120);
-        let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray'} );
+        let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true, opacity: 0} );
         let groundMesh = new THREE.Mesh( groundGeometry, groundMaterial );
         groundMesh.translateY(-0.5);
         groundMesh.name = "ground";

@@ -1,5 +1,6 @@
 // three.js
 import * as THREE from 'three'
+import * as FBXLoader from 'three-fbx-loader'
 
 // local imports
 import { Renderer } from './renderer';
@@ -88,7 +89,34 @@ export class Main {
         this.scene.add( poly );
         */
 
-        this.scene.addStage(25, 2);
+        // load fbx model and texture                                               
+        const objs = [];
+        const loader = new FBXLoader();
+        loader.load("../assets/models/scene.FBX", group => {
+            
+            console.log(group);
+            /*
+            group.children.forEach((child) => {
+                //console.log(child);
+                //if (child.type == 'Mesh') {
+
+                    child.scale.set(0.2, 0.2, 0.2);
+                    child.position.set(0,0,0);
+                    this.scene.add(child);
+                    console.log("added", child.name);
+                    // apply texture
+                    //child.material.map = texture
+                    //child.material.needsUpdate = true;
+                    
+                //}
+            });
+            */
+            group.scale.set(0.1,0.1,0.1);
+            this.scene.add(group);
+            //objs.push({model, mixer});
+        });
+
+        //this.scene.addStage(25, 2);
 
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
