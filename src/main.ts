@@ -44,7 +44,7 @@ export class Main {
 
         this.player = new Player(this.scene, this.camera);
 
-        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 30);
+        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 35);
         this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
 
         this.raycaster = new THREE.Raycaster();
