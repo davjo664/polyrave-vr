@@ -12,6 +12,7 @@ export class FOAmbisonics {
         var audioContext = new AudioContext();
         var audioElementSource =
             audioContext.createMediaElementSource(audioElement);
+        // @ts-ignore: Unreachable code error
         var foaRenderer = Omnitone.createFOARenderer(audioContext);
 
         // Make connection and start play.
