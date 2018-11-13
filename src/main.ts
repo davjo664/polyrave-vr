@@ -11,6 +11,7 @@ import { Player } from './player';
 import { PositionalAudio } from './positional-audio';
 import { BoxGeometry } from 'three';
 import { FOAmbisonics } from './ambient-audio';
+import { VolumetricLight } from './volumetric-light';
 
 export class Main {
     private scene: Scene;
@@ -20,6 +21,8 @@ export class Main {
     private player: Player;
     private positionalSceneAudio: PositionalAudio;
     private ambientAudio: FOAmbisonics;
+    private volumetricLight1: VolumetricLight;
+    private volumetricLight2: VolumetricLight;
     private raycaster: THREE.Raycaster;
     private mouse: any = {x:0, y:0};
     private crosshair: THREE.Mesh;
@@ -31,6 +34,7 @@ export class Main {
 
         // create the renderer
         this.renderer = new Renderer(this.container);
+        this.renderer.shadowMapEnabled = true;
 
         // @ts-ignore: Unreachable code error
         this.stats = new Stats();
@@ -46,8 +50,12 @@ export class Main {
         this.player = new Player(this.scene, this.camera);
         this.player.position.y = 3;
 
-        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 17);
-        this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
+        //this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 17);
+        //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
+
+        // Add scene light beams
+        this.volumetricLight1 = new VolumetricLight(this.scene, -18, 8, -3, 'lightblue');
+        this.volumetricLight2 = new VolumetricLight(this.scene, -18, 8, 15, 'purple');
 
         this.raycaster = new THREE.Raycaster();
 
@@ -121,7 +129,7 @@ export class Main {
         });
 
         //this.scene.addStage(25, 2);
-
+        console.log(this.scene)
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
     
@@ -134,6 +142,8 @@ export class Main {
     render(): void {
         this.player.update();
         this.stats.update();
+        this.volumetricLight1.update();
+        this.volumetricLight2.update();
         this.raycaster.setFromCamera(this.renderer.vr.getDevice() ? {x: 0, y:0} : this.mouse, this.camera );
         var intersects = this.raycaster.intersectObject(this.scene.getObjectByName("ground"));
         if (intersects.length > 0) {

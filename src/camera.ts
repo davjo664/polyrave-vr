@@ -14,6 +14,6 @@ export class Camera extends THREE.PerspectiveCamera {
 
         this.position.x = Math.sin( time ) * 3;
         this.position.z = Math.cos( time ) * 3;
-        this.lookAt( 0, 1.5, 0 );
+        this.lookAt( 0, 3, 0 );
     }
 }

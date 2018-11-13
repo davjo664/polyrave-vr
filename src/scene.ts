@@ -15,9 +15,10 @@ export class Scene extends THREE.Scene {
         //this.add( new THREE.GridHelper( 100, 100 ) );
 
         // add lights
-        let light = new THREE.DirectionalLight(0xffffff, 1.0)
+        let light = new THREE.DirectionalLight(0xffffff, 0.7)
         light.position.set(100, 100, 100)
         this.add(light)
+
 
         let ambient = new THREE.HemisphereLight( 0xbbbbff, 0x886666, 0.75 );
         ambient.position.set( -0.5, 0.75, -1 );
