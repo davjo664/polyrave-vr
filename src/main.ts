@@ -1,6 +1,5 @@
 // three.js
 import * as THREE from 'three'
-import * as FBXLoader from 'three-fbx-loader'
 
 // local imports
 import { Renderer } from './renderer';
@@ -101,38 +100,11 @@ export class Main {
         this.scene.add( poly );
         */
 
-        // load fbx model and texture                                               
-        const objs = [];
-        const loader = new FBXLoader();
-        loader.load("../assets/models/scene.FBX", group => {
-            
-            console.log(group);
-
-            group.children.forEach((child) => {
-                if (child.name == 'scenModel') {
-                    child.material.color = new THREE.Color(0.5, 0.5, 0.5);
-                    /*
-                    child.children.forEach((grandChild) => {
-                        grandChild.material.color = new THREE.Color(0.3, 0.3, 0.3);
-                    });
-                    */
-                } else if (child.name == 'markModel') {
-                    child.material.color = new THREE.Color(0, 0.2, 0);
-                }
-                else if (child.name.includes('stam')) {
-                    let crown = child.children[0];
-                    child.material.color = new THREE.Color(77/255, 38/255, 0);
-                    crown.material.color = new THREE.Color(0, 0.8, 0);
-                }
-            });
-            group.scale.set(0.1,0.1,0.1);
-            group.rotateY(0.16973888889 * Math.PI);
-            this.scene.add(group);
-            //objs.push({model, mixer});
-        });
-
+        // load fbx model and texture    
+        this.scene.importStaticFBXModel("../assets/models/scene.FBX");                                     
+        
         //this.scene.addStage(25, 2);
-        console.log(this.scene)
+
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
     

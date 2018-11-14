@@ -1,5 +1,6 @@
 // three.js
 import * as THREE from 'three'
+import * as FBXLoader from 'three-fbx-loader'
 
 export class Scene extends THREE.Scene {
     constructor() {
@@ -47,6 +48,37 @@ export class Scene extends THREE.Scene {
 
     }
 
+    importStaticFBXModel(path) {
+
+        const loader = new FBXLoader();
+        loader.load(path, group => {
+            
+            console.log(group);
+
+            group.children.forEach((child) => {
+                if (child.name == 'scenModel') {
+                    child.material.color = new THREE.Color(0.5, 0.5, 0.5);
+                    /*
+                    child.children.forEach((grandChild) => {
+                        grandChild.material.color = new THREE.Color(0.3, 0.3, 0.3);
+                    });
+                    */
+                } else if (child.name == 'markModel') {
+                    child.material.color = new THREE.Color(0, 0.2, 0);
+                }
+                else if (child.name.includes('stam')) {
+                    let crown = child.children[0];
+                    child.material.color = new THREE.Color(77/255, 38/255, 0);
+                    crown.material.color = new THREE.Color(0, 0.8, 0);
+                }
+            });
+            group.scale.set(0.1,0.1,0.1);
+            group.rotateY(0.16973888889 * Math.PI);
+            this.add(group);
+        });
+    }
+
+    /*
     addStage = (width, height) => {
         const geometry0 = new THREE.CylinderGeometry(width + 0.5, width, height, 30, 5, false, 0);
         let baseMaterial = new THREE.MeshLambertMaterial( {color: 0xffffff} );
@@ -55,4 +87,6 @@ export class Scene extends THREE.Scene {
 
         this.add(stageBase);
     }
+    */
+
 }
