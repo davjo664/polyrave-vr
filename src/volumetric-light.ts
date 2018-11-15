@@ -51,7 +51,7 @@ export class VolumetricLight {
                 // intensity on angle					//
                 //////////////////////////////////////////////////////////
                 'vec3 normal	= vec3(vNormal.x, vNormal.y, abs(vNormal.z));',
-                'float angleIntensity	= pow( dot(normal, vec3(0.0, 0.0, 1.0)), anglePower );',
+                'float angleIntensity	= pow( dot(normal, vec3(0.0, 0.0, 1.0)), anglePower ) * 1.6;',
                 'intensity	= intensity * (angleIntensity);',		
                 // 'gl_FragColor	= vec4( lightColor, intensity );',
 
@@ -113,10 +113,14 @@ export class VolumetricLight {
     }
 
     update(sound_intensity) {
+
+        //Map light beam to audio analyser result
+        if (sound_intensity > 0.1) {
+            this.light.intensity = 3 * sound_intensity;
+            this.lightMesh.scale.set(1, 1, sound_intensity);
+        }
         //Update direction of light beam
         let angle = 0.05 * Math.PI * 2 * Date.now() / 100;
-        this.light.intensity = 3 * sound_intensity;
-        //this.lightMesh.geometry.scale(sound_intensity + 0.5, sound_intensity + 0.5, sound_intensity + 0.5);
         let target = this.animation(angle);
 		this.lightMesh.lookAt(target);
         this.light.target.position.copy(target);

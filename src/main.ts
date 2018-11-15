@@ -56,8 +56,8 @@ export class Main {
         // constructor: scene, xyz position, color, animation path
         var path1 = (angle) => { return new THREE.Vector3(8 * Math.cos(angle), 0, 6 * Math.sin(angle)) };
         var path2 = (angle) => { return new THREE.Vector3(-6 * Math.cos(angle), 0, -8 * Math.sin(angle)) };
-        this.volumetricLight1 = new VolumetricLight(this.scene, -18, 8, -3, 'lightblue', path1);
-        this.volumetricLight2 = new VolumetricLight(this.scene, -18, 8, 15, 'purple', path2);
+        this.volumetricLight1 = new VolumetricLight(this.scene, -17, 8, -3, 'lightblue', path1);
+        this.volumetricLight2 = new VolumetricLight(this.scene, -17, 8, 15, 'purple', path2);
 
         this.raycaster = new THREE.Raycaster();
 
