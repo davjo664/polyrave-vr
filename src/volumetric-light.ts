@@ -113,11 +113,11 @@ export class VolumetricLight {
         
     }
 
-    update() {
+    update(sound_intensity) {
         //Update direction of light beam
         let angle = 0.05 * Math.PI * 2 * Date.now() / 100;
-        // Animate volumetric beams in circular motion
-        //var target = new THREE.Vector3(6 * Math.cos(angle), 0, 6 * Math.sin(angle));
+        this.light.intensity = 3 * sound_intensity;
+        //this.lightMesh.geometry.scale(sound_intensity + 0.5, sound_intensity + 0.5, sound_intensity + 0.5);
         let target = this.animation(angle);
 		this.lightMesh.lookAt(target);
         this.light.target.position.copy(target);

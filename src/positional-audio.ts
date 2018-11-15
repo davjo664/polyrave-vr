@@ -1,8 +1,10 @@
 import * as THREE from 'three'
 
 export class PositionalAudio { 
+    private analyser: THREE.AudioAnalyser;
+
     constructor(scene, camera, audioName, distance) {        
-        
+
         // create an AudioListener and add it to the camera
         var listener = new THREE.AudioListener();
         camera.add( listener );
@@ -10,6 +12,10 @@ export class PositionalAudio {
         // create the PositionalAudio object (passing in the listener)
         let audioLeft = new THREE.PositionalAudio( listener );
         let audioRight = new THREE.PositionalAudio( listener );
+
+        // Create analyser to analyse song frequencies
+        // We only need to analyse one audio since they play the same song
+        this.analyser = new THREE.AudioAnalyser(audioLeft, 512);
 
         // load a sound and set it as the PositionalAudio object's buffer
         var audioLoader = new THREE.AudioLoader();
@@ -53,5 +59,9 @@ export class PositionalAudio {
         leftSpeaker.add( audioLeft );
         rightSpeaker.add( audioRight );
 
+    }
+
+    getIntensity() {
+        return this.analyser.getAverageFrequency() / 100;
     }
 }
