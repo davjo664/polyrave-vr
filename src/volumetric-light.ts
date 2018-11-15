@@ -117,7 +117,7 @@ export class VolumetricLight {
         //Map light beam to audio analyser result
         if (sound_intensity > 0.1) {
             this.light.intensity = 3 * sound_intensity;
-            this.lightMesh.scale.set(1, 1, sound_intensity);
+            this.lightMesh.scale.set(1, 1, sound_intensity * 3);
         }
         //Update direction of light beam
         let angle = 0.05 * Math.PI * 2 * Date.now() / 100;
