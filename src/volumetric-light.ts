@@ -52,7 +52,7 @@ export class VolumetricLight {
                 //////////////////////////////////////////////////////////
                 'vec3 normal	= vec3(vNormal.x, vNormal.y, abs(vNormal.z));',
                 'float angleIntensity	= pow( dot(normal, vec3(0.0, 0.0, 1.0)), anglePower );',
-                //'intensity	= intensity * (angleIntensity + 0.7);',		
+                'intensity	= intensity * (angleIntensity);',		
                 // 'gl_FragColor	= vec4( lightColor, intensity );',
 
                 //////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ export class VolumetricLight {
             '}',
         ].join('\n');
 
-        var gg = new THREE.CylinderGeometry(0.2, 4, 15, 32*2, 20, true)
+        var gg = new THREE.CylinderGeometry(0, 30, 100, 32*2, 20, false)
         var mm	= new THREE.ShaderMaterial({
             uniforms: { 
                 attenuation	: {
@@ -73,7 +73,7 @@ export class VolumetricLight {
                 },
                 anglePower	: {
                     type	: "f",
-                    value	: 20.0
+                    value	: 10.0
                 },
                 spotPosition		: {
                     type	: "v3",
@@ -86,8 +86,7 @@ export class VolumetricLight {
             },
             vertexShader	: this.vertexShader,
             fragmentShader	: this.fragmentShader,
-            // side		: THREE.DoubleSide,
-            // blending	: THREE.AdditiveBlending,
+            side		: THREE.DoubleSide,
             transparent	: true,
             depthWrite	: false,
         });
