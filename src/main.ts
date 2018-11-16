@@ -117,10 +117,11 @@ export class Main {
     render(): void {
         this.player.update();
         this.stats.update();
+
         const sound_intensity = this.positionalSceneAudio.getIntensity();
-        //console.log(sound_intensity);
         this.volumetricLight1.update(sound_intensity);
         this.volumetricLight2.update(sound_intensity);
+
         this.raycaster.setFromCamera(this.renderer.vr.getDevice() ? {x: 0, y:0} : this.mouse, this.camera );
         var intersects = this.raycaster.intersectObject(this.scene.getObjectByName("ground"));
         if (intersects.length > 0) {

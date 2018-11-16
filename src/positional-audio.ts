@@ -62,6 +62,16 @@ export class PositionalAudio {
     }
 
     getIntensity() {
-        return this.analyser.getAverageFrequency() / 100;
+        // Get frequency data 
+        let frequencyData = this.analyser.getFrequencyData();
+        let lowFrequenciesEnd = frequencyData.length/4;
+        let sum = 0;
+        // Iterate part of frequencies and sum
+        for (let i = 0; i < lowFrequenciesEnd; i++) {
+            sum += frequencyData[i];
+        }
+
+        // Return frequency average
+        return (sum/lowFrequenciesEnd)/100;
     }
 }
