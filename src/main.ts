@@ -49,15 +49,15 @@ export class Main {
         this.player = new Player(this.scene, this.camera);
         this.player.position.y = 3;
 
-        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 17);
+        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 18);
         //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
 
         // Add scene light beams 
         // constructor: scene, xyz position, color, animation path
         var path1 = (angle) => { return new THREE.Vector3(8 * Math.cos(angle), 0, 6 * Math.sin(angle)) };
         var path2 = (angle) => { return new THREE.Vector3(-6 * Math.cos(angle), 0, -8 * Math.sin(angle)) };
-        this.volumetricLight1 = new VolumetricLight(this.scene, -17, 8, -3, 'lightblue', path1);
-        this.volumetricLight2 = new VolumetricLight(this.scene, -17, 8, 15, 'purple', path2);
+        this.volumetricLight1 = new VolumetricLight(this.scene, -25, 9, -3, 'lightblue', path1);
+        this.volumetricLight2 = new VolumetricLight(this.scene, -25, 9, 15, 'purple', path2);
 
         this.raycaster = new THREE.Raycaster();
 
@@ -93,17 +93,12 @@ export class Main {
             }
         });
 
-        // POLY REST API
-        /*
-        let randomAssets = ['7Rr7j8S0q6C','fsUd856ZJZM']
-        let poly = new Poly(randomAssets[Math.floor(Math.random()*randomAssets.length)]);
-        this.scene.add( poly );
-        */
+        
 
         // load fbx model and texture    
         this.scene.importStaticFBXModel("../assets/models/scene.FBX");                                     
         
-        //this.scene.addStage(25, 2);
+        this.scene.addDJBooth();
 
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';

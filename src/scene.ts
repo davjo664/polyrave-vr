@@ -1,6 +1,7 @@
 // three.js
 import * as THREE from 'three'
 import * as FBXLoader from 'three-fbx-loader'
+import { Poly } from './poly'
 
 export class Scene extends THREE.Scene {
     constructor() {
@@ -78,15 +79,16 @@ export class Scene extends THREE.Scene {
         });
     }
 
-    /*
-    addStage = (width, height) => {
-        const geometry0 = new THREE.CylinderGeometry(width + 0.5, width, height, 30, 5, false, 0);
-        let baseMaterial = new THREE.MeshLambertMaterial( {color: 0xffffff} );
-        let stageBase = new THREE.Mesh( geometry0, baseMaterial );
-        stageBase.position.set(0, height/2, 50);
-
-        this.add(stageBase);
+    addDJBooth = () => {
+        // Not working properly
+        /*
+        let DjTableID = '082e6B-a6or';
+        let DjTable = new Poly(DjTableID);
+        this.add( DjTable );
+        //DjTable.position.set(-5, 4, 0);
+        //DjTable.rotateY(Math.PI/2);
+        DjTable.scale.set(0.01, 0.01, 0.01);
+        */
     }
-    */
 
 }

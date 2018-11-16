@@ -44,13 +44,16 @@ export class PositionalAudio {
 
         // create an object for the sound to play from
         // Make this transparent when positioning is complete
-        let sphere = new THREE.SphereGeometry( 1, 10, 10 );
+        let sphere = new THREE.BoxGeometry( 1, 3, 2 );
         const material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
         let leftSpeaker = new THREE.Mesh( sphere, material );
         let rightSpeaker = new THREE.Mesh( sphere, material );
 
-        leftSpeaker.position.set(-18, 6.5, distance/2 + 7);
-        rightSpeaker.position.set(-18, 6.5, -distance/2 + 7);
+        //leftSpeaker.rotateY(Math.PI/2);
+        //rightSpeaker.rotateY(Math.PI/2);
+
+        leftSpeaker.position.set(-26, 7, distance/2 + 7);
+        rightSpeaker.position.set(-26, 7, -distance/2 + 7);
 
         scene.add( leftSpeaker );
         scene.add( rightSpeaker );
