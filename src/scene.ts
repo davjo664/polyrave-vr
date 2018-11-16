@@ -56,6 +56,7 @@ export class Scene extends THREE.Scene {
             
             console.log(group);
 
+            // Iterate model and assign colors
             group.children.forEach((child) => {
                 if (child.name == 'scenModel') {
                     child.material.color = new THREE.Color(0.5, 0.5, 0.5);
@@ -64,15 +65,31 @@ export class Scene extends THREE.Scene {
                         grandChild.material.color = new THREE.Color(0.3, 0.3, 0.3);
                     });
                     */
+                // Ground
                 } else if (child.name == 'markModel') {
-                    child.material.color = new THREE.Color(0, 0.2, 0);
+                    // Create material with bump mapping
+                    var texture = new THREE.TextureLoader().load('../assets/textures/grass.jpg');
+                    child.material = new THREE.MeshPhongMaterial();
+
+                    child.material.bumpMap = texture;
+                    child.material.bumpScale = 50;
+                    child.material.shininess = 5;
+                    child.material.color = new THREE.Color(0, 0.1, 0);
                 }
+                // Small trees
                 else if (child.name.includes('stam')) {
                     let crown = child.children[0];
                     child.material.color = new THREE.Color(77/255, 38/255, 0);
                     crown.material.color = new THREE.Color(0, 0.8, 0);
                 }
+                // Big trees
+                else if (child.name == 'big_treeModel' || child.name == 'stort_trdModel') {
+                    let treeBase = child.children[0];
+                    child.material.color = new THREE.Color(0, 0.8, 0);
+                    treeBase.material.color = new THREE.Color(77/255, 38/255, 0);
+                }
             });
+
             group.scale.set(0.1,0.1,0.1);
             group.rotateY(0.16973888889 * Math.PI);
             this.add(group);
@@ -81,14 +98,12 @@ export class Scene extends THREE.Scene {
 
     addDJBooth = () => {
         // Not working properly
-        /*
         let DjTableID = '082e6B-a6or';
         let DjTable = new Poly(DjTableID);
         this.add( DjTable );
         //DjTable.position.set(-5, 4, 0);
         //DjTable.rotateY(Math.PI/2);
         DjTable.scale.set(0.01, 0.01, 0.01);
-        */
     }
 
 }

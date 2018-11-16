@@ -93,13 +93,11 @@ export class Main {
             }
         });
 
-        
+        //this.scene.addDJBooth();
 
         // load fbx model and texture    
         this.scene.importStaticFBXModel("../assets/models/scene.FBX");                                     
-        
-        this.scene.addDJBooth();
-
+    
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
     
