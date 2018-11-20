@@ -11,6 +11,7 @@ import { PositionalAudio } from './positional-audio';
 import { BoxGeometry } from 'three';
 import { FOAmbisonics } from './ambient-audio';
 import { VolumetricLight } from './volumetric-light';
+import { Arrow } from './arrow';
 
 export class Main {
     private scene: Scene;
@@ -26,6 +27,8 @@ export class Main {
     private mouse: any = {x:0, y:0};
     private crosshair: THREE.Mesh;
     private stats: any;
+    private arrow: Arrow;
+    private walkTimer: number = 0.0;
     constructor(container) {
 
         // // the HTML container
@@ -69,8 +72,10 @@ export class Main {
                 transparent: true
             } )
         );
-        this.crosshair.position.z = - 2;
+        this.crosshair.position.z = -4;
         this.camera.add( this.crosshair );
+
+
 
         // Initial size update set to canvas container
         this.updateSize();
@@ -90,8 +95,16 @@ export class Main {
             }
             else if (event.key === "ArrowRight") {
                 this.camera.rotation.y -= 0.5
+            } else if (event.key === "ArrowUp") {
+                this.camera.rotation.x += 0.5
+            } else if (event.key === "ArrowDown") {
+                this.camera.rotation.x -= 0.5
             }
         });
+
+        // Works when not setting scale for the scene group...
+        this.arrow = new Arrow('dJNY2d6MSO2');
+        // this.scene.add( this.arrow );
 
         //this.scene.addDJBooth();
 
@@ -118,11 +131,23 @@ export class Main {
         this.raycaster.setFromCamera(this.renderer.vr.getDevice() ? {x: 0, y:0} : this.mouse, this.camera );
         var intersects = this.raycaster.intersectObject(this.scene.getObjectByName("ground"));
         if (intersects.length > 0) {
-            this.player.setEndPos(intersects[ 0 ].point);
-            this.crosshair.visible = true;
+            this.walkTimer += 1;
+            if(this.walkTimer > 90) {
+                this.player.setEndPos(new THREE.Vector3(intersects[ 0 ].point.x,4,intersects[ 0 ].point.z));
+                // @ts-ignore: Unreachable code error
+                this.arrow.position.set(intersects[ 0 ].point.x,intersects[ 0 ].point.y+1,intersects[ 0 ].point.z);
+                this.walkTimer = 0.0
+            } else {
+                 // @ts-ignore: Unreachable code error
+                this.crosshair.material.opacity = (this.walkTimer/90);
+                
+            }
+            
         } else {
-            this.crosshair.visible = false;
+            this.walkTimer = 0.0;
             this.player.setEndPos(this.player.position);
+             // @ts-ignore: Unreachable code error
+             this.crosshair.material.opacity = 0;
         }
         this.renderer.render(this.scene, this.camera)
         requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
