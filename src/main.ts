@@ -12,6 +12,7 @@ import { BoxGeometry } from 'three';
 import { FOAmbisonics } from './ambient-audio';
 import { VolumetricLight } from './volumetric-light';
 import { Arrow } from './arrow';
+import { ModelLoader } from './model-loader';
 
 export class Main {
     private scene: Scene;
@@ -47,7 +48,7 @@ export class Main {
 
         // create the camera
         const aspectRatio = this.renderer.domElement.width / this.renderer.domElement.height;
-        this.camera = new Camera(aspectRatio);
+        this.camera = new Camera(aspectRatio*1.2);
 
         this.player = new Player(this.scene, this.camera);
         this.player.position.y = 3;
@@ -102,9 +103,16 @@ export class Main {
             }
         });
 
-        // Works when not setting scale for the scene group...
         this.arrow = new Arrow('dJNY2d6MSO2');
-        // this.scene.add( this.arrow );
+        this.scene.add( this.arrow );
+
+        // TESTING TESTING //
+        let a = new Poly('7FIoX9hSSRy');
+        // this.scene.add(a);
+
+        let c = new ModelLoader("../assets/models/test.obj","../assets/models/test.mtl");
+        // this.scene.add(c);
+        /////////////////
 
         //this.scene.addDJBooth();
 
