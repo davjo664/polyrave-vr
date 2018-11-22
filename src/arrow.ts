@@ -4,7 +4,7 @@ import { MTLLoader, OBJLoader } from 'three-obj-mtl-loader'
 import { API_KEY } from './apikey'
 
 export class Arrow extends THREE.Group{
-    constructor(asset) {
+    constructor() {
         super();
 
         if(!API_KEY) {
@@ -12,7 +12,7 @@ export class Arrow extends THREE.Group{
             return;
         }
 
-        fetch(`https://poly.googleapis.com/v1/assets/${asset}/?key=${API_KEY}`)
+        fetch(`https://poly.googleapis.com/v1/assets/dJNY2d6MSO2/?key=${API_KEY}`)
         .then(response => response.json())
         .then(asset =>  {
             var format = asset.formats.find( format => { return format.formatType === 'OBJ'; } );

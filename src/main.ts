@@ -24,6 +24,7 @@ export class Main {
     private ambientAudio: FOAmbisonics;
     private volumetricLight1: VolumetricLight;
     private volumetricLight2: VolumetricLight;
+    private volumetricLight3: VolumetricLight;
     private raycaster: THREE.Raycaster;
     private mouse: any = {x:0, y:0};
     private crosshair: THREE.Mesh;
@@ -53,15 +54,17 @@ export class Main {
         this.player = new Player(this.scene, this.camera);
         this.player.position.y = 3;
 
-        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 18);
+        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 40);
         //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
 
         // Add scene light beams 
         // constructor: scene, xyz position, color, animation path
         var path1 = (angle) => { return new THREE.Vector3(8 * Math.cos(angle), 0, 6 * Math.sin(angle)) };
         var path2 = (angle) => { return new THREE.Vector3(-6 * Math.cos(angle), 0, -8 * Math.sin(angle)) };
-        this.volumetricLight1 = new VolumetricLight(this.scene, -25, 9, -3, 'lightblue', path1);
-        this.volumetricLight2 = new VolumetricLight(this.scene, -25, 9, 15, 'purple', path2);
+        var path3 = (angle) => { return new THREE.Vector3(2 * Math.cos(angle), 0, -2 * Math.sin(angle)) };
+        this.volumetricLight1 = new VolumetricLight(this.scene, -25, 20, -20, 'blue', path1);
+        this.volumetricLight2 = new VolumetricLight(this.scene, -25, 20, 0, 'lightblue', path2);
+        this.volumetricLight3 = new VolumetricLight(this.scene, -25, 20, 20, 'blue', path3);
 
         this.raycaster = new THREE.Raycaster();
 
@@ -103,7 +106,7 @@ export class Main {
             }
         });
 
-        this.arrow = new Arrow('dJNY2d6MSO2');
+        this.arrow = new Arrow();
         this.scene.add( this.arrow );
 
         // TESTING TESTING //
@@ -114,10 +117,8 @@ export class Main {
         // this.scene.add(c);
         /////////////////
 
-        //this.scene.addDJBooth();
-
         // load fbx model and texture    
-        this.scene.importStaticFBXModel("../assets/models/scene.FBX");                                     
+        // this.scene.importStaticFBXModel("../assets/models/scene.FBX");                                     
     
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
@@ -135,6 +136,9 @@ export class Main {
         const sound_intensity = this.positionalSceneAudio.getIntensity();
         this.volumetricLight1.update(sound_intensity);
         this.volumetricLight2.update(sound_intensity);
+        this.volumetricLight3.update(sound_intensity);
+
+        this.scene.updateLightIntensity(sound_intensity/2);
 
         this.raycaster.setFromCamera(this.renderer.vr.getDevice() ? {x: 0, y:0} : this.mouse, this.camera );
         var intersects = this.raycaster.intersectObject(this.scene.getObjectByName("ground"));

@@ -3,8 +3,8 @@ import * as THREE from 'three'
 import { MTLLoader, OBJLoader } from 'three-obj-mtl-loader'
 import { API_KEY } from './apikey'
 
-export class Poly extends THREE.Group{
-    constructor(asset) {
+export class Booth extends THREE.Group{
+    constructor() {
         super();
 
         if(!API_KEY) {
@@ -12,9 +12,7 @@ export class Poly extends THREE.Group{
             return;
         }
 
-        console.log("poly");
-
-        fetch(`https://poly.googleapis.com/v1/assets/${asset}/?key=${API_KEY}`)
+        fetch(`https://poly.googleapis.com/v1/assets/082e6B-a6or/?key=${API_KEY}`)
         .then(response => response.json())
         .then(asset =>  {
             var format = asset.formats.find( format => { return format.formatType === 'OBJ'; } );
@@ -36,10 +34,8 @@ export class Poly extends THREE.Group{
                     
                     loader.setMaterials( materials );
                     loader.load( obj.url, ( object ) => {
-                        console.log(object);
                         var box = new THREE.Box3();
                         box.setFromObject( object );
-
                         // re-center
 
                         var center = box.getCenter(new THREE.Vector3());
@@ -47,9 +43,15 @@ export class Poly extends THREE.Group{
                         object.position.sub( center );
 
                         // scale
-
                         this.add( object );
-                        this.scale.setScalar( 10 / box.getSize(new THREE.Vector3()).length() );
+                        this.scale.setScalar( 18 / box.getSize(new THREE.Vector3()).length() );
+
+                        object.children.forEach(obj => {
+                            console.log(obj);
+                            let a:THREE.Mesh = obj;
+                            a.rotation.set(0,-90*0.0174532925,0);
+                        });
+                        
 
                     } );
 

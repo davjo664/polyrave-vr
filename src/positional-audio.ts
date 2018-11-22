@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { Speaker } from './speaker';
 
 export class PositionalAudio { 
     private analyser: THREE.AudioAnalyser;
@@ -46,14 +47,24 @@ export class PositionalAudio {
         // Make this transparent when positioning is complete
         let sphere = new THREE.BoxGeometry( 1, 3, 2 );
         const material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
-        let leftSpeaker = new THREE.Mesh( sphere, material );
-        let rightSpeaker = new THREE.Mesh( sphere, material );
+        // let leftSpeaker = new THREE.Mesh( sphere, material );
+        // let rightSpeaker = new THREE.Mesh( sphere, material );
+
+        // // TESTING TESTING //
+        // let a = new Poly('fhFGDsv5jje');
+        // this.scene.add(a);
+
+        let leftSpeaker = new Speaker();
+        let rightSpeaker = new Speaker();
 
         //leftSpeaker.rotateY(Math.PI/2);
         //rightSpeaker.rotateY(Math.PI/2);
 
-        leftSpeaker.position.set(-26, 7, distance/2 + 7);
-        rightSpeaker.position.set(-26, 7, -distance/2 + 7);
+        leftSpeaker.position.set(-26, 0, distance/2 );
+        rightSpeaker.position.set(-26, 0, -distance/2 );
+
+        // leftSpeaker.rotation.set(0,180,0);
+        // rightSpeaker.rotation.set(0,0,0);
 
         scene.add( leftSpeaker );
         scene.add( rightSpeaker );

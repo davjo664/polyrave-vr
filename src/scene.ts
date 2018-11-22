@@ -1,16 +1,18 @@
 // three.js
 import * as THREE from 'three'
 import * as FBXLoader from 'three-fbx-loader'
-import { Poly } from './poly'
+import { Booth } from './booth'
 
 export class Scene extends THREE.Scene {
+    private rectLight: any;
+    private rectLightMesh: any;
     constructor() {
         super();
 
         const sceneRadius = 100;
         // add axis to the scene
         let axis = new THREE.AxesHelper(20)
-        this.add(axis);
+        // this.add(axis);
 
         this.background = new THREE.Color( 0x222222 );
 
@@ -41,12 +43,53 @@ export class Scene extends THREE.Scene {
 
         // Add ground
         const groundGeometry = new THREE.BoxGeometry(120, 0.5, 120);
-        let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true, opacity: 0} );
-        let groundMesh = new THREE.Mesh( groundGeometry, groundMaterial );
-        groundMesh.translateY(-0.5);
+        // let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true} );
+        var floorMaterial = new THREE.MeshStandardMaterial( { color: 0x808080, roughness: 0, metalness: 0 } );
+        let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
+        // groundMesh.translateY(-0.5);
         groundMesh.name = "ground";
         this.add(groundMesh);
 
+        this.addStage();
+        this.addDJBooth();
+        this.addBackgroundScreen();
+    }
+
+    addStage() {
+        const stage = new THREE.BoxGeometry(30, 5, 30);
+        var stageMaterial = new THREE.MeshStandardMaterial( { color: 0x808080, roughness: 1, metalness: 0 } );
+        let stageMesh = new THREE.Mesh( stage, stageMaterial );
+        stageMesh.position.set(-26, 0, 0);
+        this.add(stageMesh);
+    }
+
+    addBackgroundScreen() {
+        var width = 80;
+        var height = 40;
+        var intensity = 0.1;
+        // @ts-ignore: Unreachable code error
+        this.rectLight = new THREE.RectAreaLight( 0xffffff, intensity,  width, height );
+        this.rectLight.position.set( -30, 5, 0 );
+        this.rectLight.lookAt( 0, 5, 0 );
+        this.add( this.rectLight )
+        // @ts-ignore: Unreachable code error
+        var rectLightHelper = new THREE.RectAreaLightHelper( this.rectLight );
+        this.add( rectLightHelper );
+
+        this.rectLightMesh = new THREE.Mesh( new THREE.PlaneBufferGeometry(), new THREE.MeshBasicMaterial() );
+        this.rectLightMesh.scale.x = this.rectLight.width;
+        this.rectLightMesh.scale.y = this.rectLight.height;
+        this.rectLight.add( this.rectLightMesh );
+        var rectLightMeshBack = new THREE.Mesh( new THREE.PlaneBufferGeometry(), new THREE.MeshBasicMaterial( { color: 0x080808 } ) );
+        rectLightMeshBack.rotation.y = Math.PI;
+        this.rectLightMesh.add( rectLightMeshBack );
+    }
+
+    updateLightIntensity(val) {
+        if (val > 0.1) {
+            this.rectLight.intensity = val;
+            this.rectLightMesh.material.color.copy( this.rectLight.color ).multiplyScalar( this.rectLight.intensity );
+        }
     }
 
     importStaticFBXModel(path) {
@@ -98,12 +141,10 @@ export class Scene extends THREE.Scene {
 
     addDJBooth = () => {
         // Not working properly
-        let DjTableID = '082e6B-a6or';
-        let DjTable = new Poly(DjTableID);
-        this.add( DjTable );
+        let DjTable = new Booth();
+        DjTable.position.set(-20, 3, 0);
         //DjTable.position.set(-5, 4, 0);
-        //DjTable.rotateY(Math.PI/2);
-        DjTable.scale.set(0.01, 0.01, 0.01);
+        this.add( DjTable );
     }
 
 }
