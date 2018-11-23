@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { MTLLoader, OBJLoader } from 'three-obj-mtl-loader'
 
 export class ModelLoader extends THREE.Group{
-    constructor(objPath, mtlPath) {
+    constructor(objPath, mtlPath, scale) {
         //"../assets/models/scene.FBX"
         // model
 
@@ -17,7 +17,7 @@ export class ModelLoader extends THREE.Group{
             
             loader.setMaterials( materials );
             loader.load( objPath, ( object ) => {
-                console.log(object);
+                // console.log(object);
                 var box = new THREE.Box3();
                 box.setFromObject( object );
 
@@ -30,7 +30,7 @@ export class ModelLoader extends THREE.Group{
                 // scale
 
                 this.add( object );
-                this.scale.setScalar( 10 / box.getSize(new THREE.Vector3()).length() );
+                this.scale.setScalar( scale / box.getSize(new THREE.Vector3()).length() );
             } );
         } );
     }

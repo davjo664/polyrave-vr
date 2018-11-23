@@ -47,7 +47,7 @@ export class Booth extends THREE.Group{
                         this.scale.setScalar( 18 / box.getSize(new THREE.Vector3()).length() );
 
                         object.children.forEach(obj => {
-                            console.log(obj);
+                            // console.log(obj);
                             let a:THREE.Mesh = obj;
                             a.rotation.set(0,-90*0.0174532925,0);
                         });

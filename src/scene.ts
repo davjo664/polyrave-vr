@@ -1,8 +1,10 @@
 // three.js
 import * as THREE from 'three'
 import * as FBXLoader from 'three-fbx-loader'
+import { OBJLoader } from 'three-obj-mtl-loader'
 import { Booth } from './booth'
 import { Grass } from './grass'
+import { ModelLoader } from './model-loader'
 
 export class Scene extends THREE.Scene {
     private rectLight: any;
@@ -30,6 +32,7 @@ export class Scene extends THREE.Scene {
         this.add( ambient );
 
         // Add sky base 
+        /*
         var geometry = new THREE.SphereBufferGeometry(sceneRadius,32,32, Math.PI );
 
         // invert the geometry on the x-axis so that all of the faces point inward
@@ -41,10 +44,12 @@ export class Scene extends THREE.Scene {
         var mesh = new THREE.Mesh( geometry, material );
         mesh.translateY(18);
         this.add( mesh );
+        */
 
         // Add ground
         let groundWidth = 120;
         let groundDepth = 120;
+        /*
         const groundGeometry = new THREE.BoxGeometry(groundWidth, 0.5, groundDepth);
         // let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true} );
         var floorMaterial = new THREE.MeshStandardMaterial( { 
@@ -52,14 +57,23 @@ export class Scene extends THREE.Scene {
             //displacementMap: new THREE.TextureLoader().load( '../assets/textures/grass1.jpg' ),
             //displacementScale: 4
         } );
+        */
+
+        let groundMesh = new ModelLoader("../assets/models/ground.obj","../assets/models/ground.mtl", 250);   
+        this.add(groundMesh);
+        groundMesh.position.set(0, -3, 0);
+        
+        let trees = new ModelLoader("../assets/models/trees.obj","../assets/models/trees.mtl", 250);
+        this.add(trees);
+        console.log(trees);
 
         // Grass
-        var grass = new Grass(this, groundWidth, groundDepth);
+        //var grass = new Grass(this, groundWidth, groundDepth);
 
-        let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
+        //let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
         // groundMesh.translateY(-0.5);
         groundMesh.name = "ground";
-        this.add(groundMesh);
+        //this.add(groundMesh);
 
         this.addStage();
         this.addDJBooth();
@@ -148,6 +162,35 @@ export class Scene extends THREE.Scene {
             group.rotateY(0.16973888889 * Math.PI);
             this.add(group);
         });
+    }
+
+    importStaticObjModel = (path) => {
+        // instantiate a loader
+        var loader = new THREE.OBJLoader();
+        var scene = this;
+        // load a resource
+        loader.load(
+            // resource URL
+            path,
+            // called when resource is loaded
+            function ( object ) {
+                console.log(object);
+                scene.add( object );
+
+            },
+            // called when loading is in progresses
+            function ( xhr ) {
+
+                console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+            },
+            // called when loading has errors
+            function ( error ) {
+
+                console.log( 'An error happened' );
+
+            }
+        );
     }
 
     addDJBooth = () => {

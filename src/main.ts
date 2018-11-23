@@ -113,12 +113,14 @@ export class Main {
         let a = new Poly('7FIoX9hSSRy');
         // this.scene.add(a);
 
-        let c = new ModelLoader("../assets/models/test.obj","../assets/models/test.mtl");
-        // this.scene.add(c);
+        //let c = new ModelLoader("../assets/models/test.obj","../assets/models/test.mtl", 10);
+        //this.scene.add(c);
         /////////////////
 
         // load fbx model and texture    
-        // this.scene.importStaticFBXModel("../assets/models/scene.FBX");                                     
+        //this.scene.importStaticFBXModel("../assets/models/scene.FBX");  
+
+        //this.scene.importStaticObjModel('../assets/models/trunks.obj');     
     
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
