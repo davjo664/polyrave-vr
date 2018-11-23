@@ -46,19 +46,19 @@ export class Scene extends THREE.Scene {
         */
 
         // Add ground
-        let groundWidth = 120;
-        let groundDepth = 120;
-        /*
+        let groundWidth = 220;
+        let groundDepth = 220;
+        
         const groundGeometry = new THREE.BoxGeometry(groundWidth, 0.5, groundDepth);
         // let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true} );
         var floorMaterial = new THREE.MeshStandardMaterial( { 
             color: 'rgb(3, 76, 2)', roughness: 0, metalness: 0
         } );
-        */
+        
 
-        let groundMesh = new ModelLoader("../assets/models/ground.obj","../assets/models/ground.mtl", 400);   
-        this.add(groundMesh);
-        groundMesh.position.set(40, -5, 25);
+        let ground = new ModelLoader("../assets/models/ground.obj","../assets/models/ground.mtl", 400);   
+        this.add(ground);
+        ground.position.set(40, -5, 25);
         
         let trees = new ModelLoader("../assets/models/trees.obj","../assets/models/trees.mtl", 400);
         this.add(trees);
@@ -67,14 +67,15 @@ export class Scene extends THREE.Scene {
         // Grass
         //var grass = new Grass(this, groundWidth, groundDepth);
 
-        //let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
-        // groundMesh.translateY(-0.5);
+        let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
+        groundMesh.translateY(-0.5);
         groundMesh.name = "ground";
-        //this.add(groundMesh);
+        this.add(groundMesh);
 
         this.addStage();
         this.addDJBooth();
         this.addBackgroundScreen();
+        this.addScenePanel();
     }
 
     addStage() {
@@ -85,8 +86,17 @@ export class Scene extends THREE.Scene {
         this.add(stageMesh);
     }
 
+    addScenePanel() {
+        const geometry = new THREE.CylinderGeometry(1, 1, 50, 15, 10, false, 0, Math.PI);
+        const material = new THREE.MeshStandardMaterial( { color: 0x444444, roughness: 10, metalness: 0 } );
+        let mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(-30, 24, 0);
+        mesh.rotateX(Math.PI/2);
+        this.add(mesh);
+    }
+
     addBackgroundScreen() {
-        var width = 80;
+        var width = 70;
         var height = 40;
         var intensity = 0.1;
         // @ts-ignore: Unreachable code error

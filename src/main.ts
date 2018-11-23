@@ -62,9 +62,9 @@ export class Main {
         var path1 = (angle) => { return new THREE.Vector3(8 * Math.cos(angle), 0, 6 * Math.sin(angle)) };
         var path2 = (angle) => { return new THREE.Vector3(-6 * Math.cos(angle), 0, -8 * Math.sin(angle)) };
         var path3 = (angle) => { return new THREE.Vector3(2 * Math.cos(angle), 0, -2 * Math.sin(angle)) };
-        this.volumetricLight1 = new VolumetricLight(this.scene, -25, 20, -20, 'blue', path1);
-        this.volumetricLight2 = new VolumetricLight(this.scene, -25, 20, 0, 'lightblue', path2);
-        this.volumetricLight3 = new VolumetricLight(this.scene, -25, 20, 20, 'blue', path3);
+        this.volumetricLight1 = new VolumetricLight(this.scene, -30, 24, -20, 'blue', path1);
+        this.volumetricLight2 = new VolumetricLight(this.scene, -30, 24, 0, 'lightblue', path2);
+        this.volumetricLight3 = new VolumetricLight(this.scene, -30, 24, 20, 'blue', path3);
 
         this.raycaster = new THREE.Raycaster();
 
@@ -108,10 +108,6 @@ export class Main {
 
         this.arrow = new Arrow();
         this.scene.add( this.arrow );
-
-        // TESTING TESTING //
-        //let a = new Poly('7FIoX9hSSRy');
-        // this.scene.add(a);
 
         //let c = new ModelLoader("../assets/models/test.obj","../assets/models/test.mtl", 10);
         //this.scene.add(c);

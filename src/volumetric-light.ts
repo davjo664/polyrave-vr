@@ -5,6 +5,7 @@ export class VolumetricLight {
     private fragmentShader: any;
     private light: THREE.SpotLight = new THREE.SpotLight;
     private lightMesh: THREE.Mesh = new THREE.Mesh;
+    private lightSourceMesh: THREE.Mesh = new THREE.Mesh;
     private animation: any;
 
     constructor(scene, x, y, z, color, animation) {
@@ -91,6 +92,7 @@ export class VolumetricLight {
             depthWrite	: false,
         });
 
+        // Light beam mesh
         gg.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -gg.parameters.height/2, 0 ) );
         gg.applyMatrix( new THREE.Matrix4().makeRotationX( -Math.PI / 2 ) );
         this.lightMesh = new THREE.Mesh( gg, mm );
@@ -99,7 +101,16 @@ export class VolumetricLight {
         mm.uniforms.lightColor.value.set( color );
         mm.uniforms.spotPosition.value	= this.lightMesh.position;
         scene.add( this.lightMesh );
+
+        // Light source mesh
+        const sourceGeometry = new THREE.SphereGeometry(1.3, 5, 5);
+        const sourceMaterial = new THREE.MeshPhongMaterial( { color: color } );
+        this.lightSourceMesh = new THREE.Mesh(sourceGeometry, sourceMaterial);
+        this.lightSourceMesh.position.copy(this.lightMesh.position);
+        scene.add(this.lightSourceMesh);
+        console.log(this.lightSourceMesh);
         
+        // Light
         this.light = new THREE.SpotLight();
         this.light.position.copy(this.lightMesh.position);
         this.light.color = mm.uniforms.lightColor.value;
