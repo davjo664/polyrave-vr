@@ -12,7 +12,6 @@ export class Scene extends THREE.Scene {
     constructor() {
         super();
 
-        const sceneRadius = 100;
         // add axis to the scene
         let axis = new THREE.AxesHelper(20)
         // this.add(axis);
@@ -53,19 +52,17 @@ export class Scene extends THREE.Scene {
         const groundGeometry = new THREE.BoxGeometry(groundWidth, 0.5, groundDepth);
         // let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true} );
         var floorMaterial = new THREE.MeshStandardMaterial( { 
-            color: 'rgb(3, 76, 2)', roughness: 0, metalness: 0,
-            //displacementMap: new THREE.TextureLoader().load( '../assets/textures/grass1.jpg' ),
-            //displacementScale: 4
+            color: 'rgb(3, 76, 2)', roughness: 0, metalness: 0
         } );
         */
 
-        let groundMesh = new ModelLoader("../assets/models/ground.obj","../assets/models/ground.mtl", 250);   
+        let groundMesh = new ModelLoader("../assets/models/ground.obj","../assets/models/ground.mtl", 400);   
         this.add(groundMesh);
-        groundMesh.position.set(0, -3, 0);
+        groundMesh.position.set(40, -5, 25);
         
-        let trees = new ModelLoader("../assets/models/trees.obj","../assets/models/trees.mtl", 250);
+        let trees = new ModelLoader("../assets/models/trees.obj","../assets/models/trees.mtl", 400);
         this.add(trees);
-        console.log(trees);
+        trees.position.set(40, 0, 25);
 
         // Grass
         //var grass = new Grass(this, groundWidth, groundDepth);
@@ -81,10 +78,10 @@ export class Scene extends THREE.Scene {
     }
 
     addStage() {
-        const stage = new THREE.BoxGeometry(30, 5, 30);
+        const stage = new THREE.BoxGeometry(30, 3, 30);
         var stageMaterial = new THREE.MeshStandardMaterial( { color: 0x808080, roughness: 1, metalness: 0 } );
         let stageMesh = new THREE.Mesh( stage, stageMaterial );
-        stageMesh.position.set(-26, 0, 0);
+        stageMesh.position.set(-26, 3, 0);
         this.add(stageMesh);
     }
 
@@ -164,40 +161,10 @@ export class Scene extends THREE.Scene {
         });
     }
 
-    importStaticObjModel = (path) => {
-        // instantiate a loader
-        var loader = new THREE.OBJLoader();
-        var scene = this;
-        // load a resource
-        loader.load(
-            // resource URL
-            path,
-            // called when resource is loaded
-            function ( object ) {
-                console.log(object);
-                scene.add( object );
-
-            },
-            // called when loading is in progresses
-            function ( xhr ) {
-
-                console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-            },
-            // called when loading has errors
-            function ( error ) {
-
-                console.log( 'An error happened' );
-
-            }
-        );
-    }
-
     addDJBooth = () => {
         // Not working properly
         let DjTable = new Booth();
-        DjTable.position.set(-20, 3, 0);
-        //DjTable.position.set(-5, 4, 0);
+        DjTable.position.set(-20, 4, 0);
         this.add( DjTable );
     }
 

@@ -110,7 +110,7 @@ export class Main {
         this.scene.add( this.arrow );
 
         // TESTING TESTING //
-        let a = new Poly('7FIoX9hSSRy');
+        //let a = new Poly('7FIoX9hSSRy');
         // this.scene.add(a);
 
         //let c = new ModelLoader("../assets/models/test.obj","../assets/models/test.mtl", 10);
@@ -118,9 +118,7 @@ export class Main {
         /////////////////
 
         // load fbx model and texture    
-        //this.scene.importStaticFBXModel("../assets/models/scene.FBX");  
-
-        //this.scene.importStaticObjModel('../assets/models/trunks.obj');     
+        //this.scene.importStaticFBXModel("../assets/models/scene.FBX");      
     
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
