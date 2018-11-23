@@ -108,7 +108,7 @@ export class VolumetricLight {
         this.lightSourceMesh = new THREE.Mesh(sourceGeometry, sourceMaterial);
         this.lightSourceMesh.position.copy(this.lightMesh.position);
         scene.add(this.lightSourceMesh);
-        console.log(this.lightSourceMesh);
+        // console.log(this.lightSourceMesh);
         
         // Light
         this.light = new THREE.SpotLight();

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 export class Grass extends THREE.Mesh {
-    constructor(scene, groundWidth, groundDepth) {
+    constructor(scene, maxRadius, numberOfGrassTushes) {
         super();
         // load the texture
         var textureUrl	= '../assets/textures/grass_tuft.png'
@@ -9,20 +9,23 @@ export class Grass extends THREE.Mesh {
         //var texture	= THREE.ImageUtils.loadTexture(textureUrl)
         // build the material
         var material	= new THREE.MeshPhongMaterial({
-            map		: texture,
+            map		    : texture,
             color		: 'grey',
-            emissive	: 'darkgreen',
+            emissive	: new THREE.Color(0.0235/2, 0.5294/2, 0.0235/2),
             alphaTest	: 0.7,
         })
-        // create the mesh
+
         let positions = [];
-        let numberOfGrassTushes = 15000;
-        // Add random positions to grass tushes
+        let angle;
+        let radius;
+        // Add random positions inside circle with radius: maxRadius
         for (let i = 0; i < numberOfGrassTushes; i++) {
+            angle = (Math.random() * 2 * Math.PI);
+            radius = (Math.random() * maxRadius * maxRadius);
             positions.push(new THREE.Vector3(
-                Math.floor(Math.random() * groundWidth) + 1,
+                Math.cos(angle) * Math.sqrt(radius),
                 0,
-                Math.floor(Math.random() * groundDepth) + 1
+                Math.sin(angle) * Math.sqrt(radius)
             ));
         }
         var geometry = this.createGrassGeometry(positions, material);
@@ -30,12 +33,12 @@ export class Grass extends THREE.Mesh {
         scene.add(mesh);
 
         // Translate merged mesh
-        mesh.position.set(-30, 1, -120);
+        mesh.position.set(20, 1, 0);
     }
 
     createGrassGeometry(positions, material) {
         // create the initial geometry
-        let width = 3;
+        let width = 5;
         let height = 1;
         var geometry	= new THREE.PlaneGeometry(width, height)
         geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, height/2, 0 ) );

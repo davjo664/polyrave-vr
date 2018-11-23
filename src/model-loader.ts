@@ -34,4 +34,5 @@ export class ModelLoader extends THREE.Group{
             } );
         } );
     }
+
 }

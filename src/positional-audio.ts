@@ -32,8 +32,8 @@ export class PositionalAudio {
                 audioRight.setBuffer( audioBuffer );
                 audioRight.setRefDistance( 20 );
                 audioRight.setLoop(true);
-                audioLeft.play();
-                audioRight.play();
+                //audioLeft.play();
+                //audioRight.play();
             }),
             function ( xhr ) {
                 console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );

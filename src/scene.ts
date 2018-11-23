@@ -65,7 +65,9 @@ export class Scene extends THREE.Scene {
         trees.position.set(40, 0, 25);
 
         // Grass
-        var grass = new Grass(this, groundWidth, groundDepth);
+        const grassRadius = 80;
+        const numberOfGrassTushes = 6000;
+        const grass = new Grass(this, grassRadius, numberOfGrassTushes);
 
         let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
         groundMesh.translateY(-0.5);
