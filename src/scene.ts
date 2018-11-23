@@ -2,6 +2,7 @@
 import * as THREE from 'three'
 import * as FBXLoader from 'three-fbx-loader'
 import { Booth } from './booth'
+import { Grass } from './grass'
 
 export class Scene extends THREE.Scene {
     private rectLight: any;
@@ -42,9 +43,19 @@ export class Scene extends THREE.Scene {
         this.add( mesh );
 
         // Add ground
-        const groundGeometry = new THREE.BoxGeometry(120, 0.5, 120);
+        let groundWidth = 120;
+        let groundDepth = 120;
+        const groundGeometry = new THREE.BoxGeometry(groundWidth, 0.5, groundDepth);
         // let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true} );
-        var floorMaterial = new THREE.MeshStandardMaterial( { color: 0x808080, roughness: 0, metalness: 0 } );
+        var floorMaterial = new THREE.MeshStandardMaterial( { 
+            color: 'rgb(3, 76, 2)', roughness: 0, metalness: 0,
+            //displacementMap: new THREE.TextureLoader().load( '../assets/textures/grass1.jpg' ),
+            //displacementScale: 4
+        } );
+
+        // Grass
+        var grass = new Grass(this, groundWidth, groundDepth);
+
         let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
         // groundMesh.translateY(-0.5);
         groundMesh.name = "ground";
