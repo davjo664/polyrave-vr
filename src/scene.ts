@@ -47,7 +47,7 @@ export class Scene extends THREE.Scene {
 
         // Add ground
         let groundWidth = 220;
-        let groundDepth = 220;
+        let groundDepth = 250;
         
         const groundGeometry = new THREE.BoxGeometry(groundWidth, 0.5, groundDepth);
         // let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true} );
@@ -65,7 +65,7 @@ export class Scene extends THREE.Scene {
         trees.position.set(40, 0, 25);
 
         // Grass
-        //var grass = new Grass(this, groundWidth, groundDepth);
+        var grass = new Grass(this, groundWidth, groundDepth);
 
         let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
         groundMesh.translateY(-0.5);

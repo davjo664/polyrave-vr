@@ -16,7 +16,7 @@ export class Grass extends THREE.Mesh {
         })
         // create the mesh
         let positions = [];
-        let numberOfGrassTushes = 300;
+        let numberOfGrassTushes = 15000;
         // Add random positions to grass tushes
         for (let i = 0; i < numberOfGrassTushes; i++) {
             positions.push(new THREE.Vector3(
@@ -28,12 +28,15 @@ export class Grass extends THREE.Mesh {
         var geometry = this.createGrassGeometry(positions, material);
         var mesh = new THREE.Mesh(geometry, material)
         scene.add(mesh);
+
+        // Translate merged mesh
+        mesh.position.set(-30, 1, -120);
     }
 
     createGrassGeometry(positions, material) {
         // create the initial geometry
-        let width = 5;
-        let height = 2;
+        let width = 3;
+        let height = 1;
         var geometry	= new THREE.PlaneGeometry(width, height)
         geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, height/2, 0 ) );
 
