@@ -153,7 +153,7 @@ export class Main {
             
         } else {
             this.walkTimer = 0.0;
-            this.player.setEndPos(this.player.position);
+            // this.player.setEndPos(this.player.position);
              // @ts-ignore: Unreachable code error
              this.crosshair.material.opacity = 0;
         }
