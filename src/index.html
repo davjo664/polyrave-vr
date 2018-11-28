@@ -9,9 +9,26 @@
 <head>
     <meta charset="utf-8">
     <title>Three.js + WebVR</title>
+    <style>
+      body {
+        background: black;
+      }
+      #appContainer {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 2s linear;
+        -webkit-transition: visibility 0s, opacity 2s linear;
+        -moz-transition: visibility 0s, opacity 2s linear;
+        -o-transition: visibility 0s, opacity 2s linear;
+        transition: visibility 0s, opacity 2s linear;
+      }
+    </style>
 </head>
 
 <body>
+    <section id=introSceneContainer class="main">
+      <div id="loading">Loading...</div>
+    </section>
     <section id="appContainer" class="main">
       <div id="loading">Loading...</div>
     </section>
