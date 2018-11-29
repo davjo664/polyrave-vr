@@ -35,6 +35,7 @@
     "@types/three": "latest",
     "three": "latest",
     "three-fbx-loader": "^1.0.3",
-    "three-obj-mtl-loader": "^1.0.3"
+    "three-obj-mtl-loader": "^1.0.3",
+    "three-text2d": "^0.4.1"
   }
 }

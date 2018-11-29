@@ -23,10 +23,32 @@ export class IntroScene extends THREE.Scene {
         light.position.set(100, 100, 100)
         this.add(light)
 
-
         let ambient = new THREE.HemisphereLight( 0xbbbbff, 0x886666, 0.75 );
         ambient.position.set( -0.5, 0.75, -1 );
         this.add( ambient );
+
+        // Add intro-text
+        var loader = new THREE.FontLoader();
+        loader.load( '.././assets/fonts/helvetiker_bold.json', font => {
+
+            var geometry = new THREE.TextGeometry( 'Welcome', {
+                font: font,
+                size: 10,
+                height: 5,
+                curveSegments: 3,
+                bevelEnabled: false,
+                bevelThickness: 10,
+                bevelSize: 8,
+                bevelSegments: 5
+            } );
+            var material = new THREE.MeshStandardMaterial({ color: 'red' });
+            var textMesh = new THREE.Mesh(geometry, material);
+
+            //Position the text
+            textMesh.position.set(35, 1, 50);
+            textMesh.rotateY(1.1*Math.PI);
+            this.add(textMesh);
+        } );
 
         // Add ground
         let groundWidth = 220;
