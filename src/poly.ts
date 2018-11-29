@@ -49,7 +49,13 @@ export class Poly extends THREE.Group{
                         // scale
 
                         this.add( object );
-                        this.scale.setScalar( 10 / box.getSize(new THREE.Vector3()).length() );
+                        this.scale.setScalar( 16 / box.getSize(new THREE.Vector3()).length() );
+
+                        object.children.forEach(obj => {
+                            // console.log(obj);
+                            let a:THREE.Mesh = obj;
+                            a.rotation.set(0,-110*0.0174532925,0);
+                        });
 
                     } );
 

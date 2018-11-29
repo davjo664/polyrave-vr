@@ -13,6 +13,7 @@ import { FOAmbisonics } from './ambient-audio';
 import { VolumetricLight } from './volumetric-light';
 import { Arrow } from './arrow';
 import { ModelLoader } from './model-loader';
+import Dancer from './dancer';
 
 export class Main {
     private scene: Scene;
@@ -31,6 +32,8 @@ export class Main {
     private stats: any;
     private arrow: Arrow;
     private walkTimer: number = 0.0;
+    private clock: THREE.Clock;
+    private dancer: Dancer;
     constructor(container) {
 
         // // the HTML container
@@ -78,9 +81,9 @@ export class Main {
         );
         this.crosshair.position.z = -4;
         this.camera.add( this.crosshair );
-
-
-
+        this.clock = new THREE.Clock();
+        this.dancer = new Dancer(this.scene);
+        
         // Initial size update set to canvas container
         this.updateSize();
 
@@ -108,6 +111,10 @@ export class Main {
 
         this.arrow = new Arrow();
         this.scene.add( this.arrow );
+
+        var dj = new Poly('73ky2Ggv_r_');
+        dj.position.set(-25, 3, 0);
+        this.scene.add(dj);
 
         //let c = new ModelLoader("../assets/models/test.obj","../assets/models/test.mtl", 10);
         //this.scene.add(c);
@@ -153,10 +160,13 @@ export class Main {
             
         } else {
             this.walkTimer = 0.0;
-            this.player.setEndPos(this.player.position);
+            // this.player.setEndPos(this.player.position);
              // @ts-ignore: Unreachable code error
              this.crosshair.material.opacity = 0;
         }
+
+        this.dancer.update(this.clock.getDelta());
+
         this.renderer.render(this.scene, this.camera)
         requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
     }
