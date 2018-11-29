@@ -41,7 +41,7 @@ export class Main {
 
         // create the renderer
         this.renderer = new Renderer(this.container);
-        this.renderer.shadowMapEnabled = true;
+        this.renderer.shadowMap.enabled = true;
 
         // @ts-ignore: Unreachable code error
         this.stats = new Stats();
@@ -55,7 +55,9 @@ export class Main {
         this.camera = new Camera(aspectRatio*1.2);
 
         this.player = new Player(this.scene, this.camera);
-        this.player.position.y = 3;
+
+        this.player.position.set(130, 3, 90);
+        this.player.rotateY(1.4*Math.PI);
 
         this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 40);
         //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
@@ -148,7 +150,7 @@ export class Main {
         if (intersects.length > 0) {
             this.walkTimer += 1;
             if(this.walkTimer > 90) {
-                this.player.setEndPos(new THREE.Vector3(intersects[ 0 ].point.x,4,intersects[ 0 ].point.z));
+                this.player.setEndPos(new THREE.Vector3(intersects[ 0 ].point.x,4,intersects[ 0 ].point.z), 2000);
                 // @ts-ignore: Unreachable code error
                 this.arrow.position.set(intersects[ 0 ].point.x,intersects[ 0 ].point.y+1,intersects[ 0 ].point.z);
                 this.walkTimer = 0.0
@@ -160,7 +162,7 @@ export class Main {
             
         } else {
             this.walkTimer = 0.0;
-            // this.player.setEndPos(this.player.position);
+            this.player.setEndPos(this.player.position, 2000);
              // @ts-ignore: Unreachable code error
              this.crosshair.material.opacity = 0;
         }

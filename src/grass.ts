@@ -67,7 +67,7 @@ export class Grass extends THREE.Mesh {
                 var object3d	= new THREE.Mesh(geometry, material)
                 object3d.rotateY(angle)
                 object3d.position.copy(position)
-                THREE.GeometryUtils.merge( mergedGeo, object3d );
+                mergedGeo.mergeMesh(object3d);
 
                 // The other side of the plane
                 // - impossible to use ```side : THREE.BothSide``` as 
@@ -75,7 +75,7 @@ export class Grass extends THREE.Mesh {
                 var object3d	= new THREE.Mesh(geometry, material)
                 object3d.rotateY(angle+Math.PI)
                 object3d.position.copy(position)
-                THREE.GeometryUtils.merge( mergedGeo, object3d );
+                mergedGeo.mergeMesh(object3d);
             }
         }
 
