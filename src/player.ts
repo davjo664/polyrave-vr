@@ -11,9 +11,9 @@ export class Player extends THREE.Object3D {
         this.lookAt( 0, 0, -1 );
     }
 
-    setEndPos(newPos: THREE.Vector3) {
+    setEndPos(newPos: THREE.Vector3, duration) {
         this.newPos = newPos;
-        new TWEEN.Tween( this.position ).to( this.newPos, 2000 ).start();
+        new TWEEN.Tween( this.position ).to( this.newPos, duration ).start();
     }
 
     update() {

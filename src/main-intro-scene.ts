@@ -14,7 +14,7 @@ import { VolumetricLight } from './volumetric-light';
 import { Arrow } from './arrow';
 import { ModelLoader } from './model-loader';
 
-export class Main {
+export class Intro {
     private scene: Scene;
     private camera: Camera;
     private renderer: Renderer;
@@ -52,9 +52,14 @@ export class Main {
         this.camera = new Camera(aspectRatio*1.2);
 
         this.player = new Player(this.scene, this.camera);
-        this.player.position.y = 3;
+        this.player.position.set(130, 3, 90);
+        this.player.rotateY(1.3*Math.PI);
 
-        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 40);
+        // Animate player to position goal
+        const goal = new THREE.Vector3(110, 3, 80);
+        this.player.setEndPos(goal, 5000);
+
+        //this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 40);
         //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
 
         // Add scene light beams 
@@ -66,8 +71,9 @@ export class Main {
         this.volumetricLight2 = new VolumetricLight(this.scene, -30, 24, 0, 'lightblue', path2);
         this.volumetricLight3 = new VolumetricLight(this.scene, -30, 24, 20, 'blue', path3);
 
-        this.raycaster = new THREE.Raycaster();
+        //this.raycaster = new THREE.Raycaster();
 
+        /*
         this.crosshair = new THREE.Mesh(
             new THREE.RingBufferGeometry( 0.02, 0.04, 32 ),
             new THREE.MeshBasicMaterial( {
@@ -78,6 +84,7 @@ export class Main {
         );
         this.crosshair.position.z = -4;
         this.camera.add( this.crosshair );
+        */
 
 
 
@@ -129,34 +136,36 @@ export class Main {
         this.player.update();
         this.stats.update();
 
-        const sound_intensity = this.positionalSceneAudio.getIntensity();
-        this.volumetricLight1.update(sound_intensity);
-        this.volumetricLight2.update(sound_intensity);
-        this.volumetricLight3.update(sound_intensity);
+        //const sound_intensity = this.positionalSceneAudio.getIntensity();
+        //this.volumetricLight1.update(sound_intensity);
+        //this.volumetricLight2.update(sound_intensity);
+        //this.volumetricLight3.update(sound_intensity);
 
-        this.scene.updateLightIntensity(sound_intensity/2);
+        //this.scene.updateLightIntensity(sound_intensity/2);
 
+        /*
         this.raycaster.setFromCamera(this.renderer.vr.getDevice() ? {x: 0, y:0} : this.mouse, this.camera );
         var intersects = this.raycaster.intersectObject(this.scene.getObjectByName("ground"));
         if (intersects.length > 0) {
             this.walkTimer += 1;
             if(this.walkTimer > 90) {
-                this.player.setEndPos(new THREE.Vector3(intersects[ 0 ].point.x,4,intersects[ 0 ].point.z), 2000);
+                this.player.setEndPos(new THREE.Vector3(intersects[ 0 ].point.x,4,intersects[ 0 ].point.z));
                 // @ts-ignore: Unreachable code error
                 this.arrow.position.set(intersects[ 0 ].point.x,intersects[ 0 ].point.y+1,intersects[ 0 ].point.z);
                 this.walkTimer = 0.0
             } else {
                  // @ts-ignore: Unreachable code error
-                this.crosshair.material.opacity = (this.walkTimer/90);
+                //this.crosshair.material.opacity = (this.walkTimer/90);
                 
             }
             
         } else {
             this.walkTimer = 0.0;
-            this.player.setEndPos(this.player.position, 2000);
+            this.player.setEndPos(this.player.position);
              // @ts-ignore: Unreachable code error
-             this.crosshair.material.opacity = 0;
+             //this.crosshair.material.opacity = 0;
         }
+        */
         this.renderer.render(this.scene, this.camera)
         requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
     }
