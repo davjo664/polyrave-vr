@@ -38,7 +38,7 @@ export class Main {
 
         // create the renderer
         this.renderer = new Renderer(this.container);
-        this.renderer.shadowMapEnabled = true;
+        this.renderer.shadowMap.enabled = true;
 
         // @ts-ignore: Unreachable code error
         this.stats = new Stats();
@@ -52,7 +52,9 @@ export class Main {
         this.camera = new Camera(aspectRatio*1.2);
 
         this.player = new Player(this.scene, this.camera);
-        this.player.position.y = 3;
+
+        this.player.position.set(130, 3, 90);
+        this.player.rotateY(1.4*Math.PI);
 
         this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 40);
         //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
