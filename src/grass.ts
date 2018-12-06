@@ -4,7 +4,7 @@ export class Grass extends THREE.Mesh {
     constructor(scene, maxRadius, numberOfGrassTushes) {
         super();
         // load the texture
-        var textureUrl	= '../assets/textures/grass_tuft.png'
+        var textureUrl	= 'assets/textures/grass_tuft.png'
         var texture = new THREE.TextureLoader().load(textureUrl);
         //var texture	= THREE.ImageUtils.loadTexture(textureUrl)
         // build the material

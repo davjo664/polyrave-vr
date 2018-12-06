@@ -29,7 +29,7 @@ export class IntroScene extends THREE.Scene {
 
         // Add intro-text
         var loader = new THREE.FontLoader();
-        loader.load( '.././assets/fonts/helvetiker_bold.json', font => {
+        loader.load( 'assets/fonts/helvetiker_bold.json', font => {
 
             var geometry = new THREE.TextGeometry( 'Welcome', {
                 font: font,
@@ -71,7 +71,7 @@ export class IntroScene extends THREE.Scene {
         trees.position.set(40, 0, 25);
         */
 
-        let ally = new ModelLoader("../assets/models/alle.obj","../assets/models/trees.mtl", 400);
+        let ally = new ModelLoader("assets/models/alle.obj","assets/models/trees.mtl", 400);
         this.add(ally);
         ally.position.set(-20, 0, 0);
 

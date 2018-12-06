@@ -59,11 +59,11 @@ export class Scene extends THREE.Scene {
         } );
         
 
-        let ground = new ModelLoader("../assets/models/ground.obj","../assets/models/ground.mtl", 400);   
+        let ground = new ModelLoader("assets/models/ground.obj","assets/models/ground.mtl", 400);   
         this.add(ground);
         ground.position.set(40, -5, 25);
         
-        let trees = new ModelLoader("../assets/models/trees.obj","../assets/models/trees.mtl", 400);
+        let trees = new ModelLoader("assets/models/trees.obj","assets/models/trees.mtl", 400);
         this.add(trees);
         trees.position.set(40, 0, 25);
 
