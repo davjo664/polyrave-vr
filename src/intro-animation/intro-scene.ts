@@ -31,7 +31,7 @@ export class IntroScene extends THREE.Scene {
         var loader = new THREE.FontLoader();
         loader.load( '.././assets/fonts/helvetiker_bold.json', font => {
 
-            var geometry = new THREE.TextGeometry( 'Welcome', {
+            var geometry = new THREE.TextGeometry( 'PolyGig VR', {
                 font: font,
                 size: 3,
                 height: 3,
@@ -45,7 +45,7 @@ export class IntroScene extends THREE.Scene {
             var textMesh = new THREE.Mesh(geometry, material);
 
             //Position the text
-            textMesh.position.set(35, 1, 50);
+            textMesh.position.set(25, 1, 20);
             textMesh.rotateY(1.1*Math.PI);
             this.add(textMesh);
         } );

@@ -84,16 +84,16 @@ export class Scene extends THREE.Scene {
     }
 
     addStage() {
-        const stage = new THREE.BoxGeometry(30, 3, 30);
+        const stage = new THREE.BoxGeometry(30, 4, 70);
         var stageMaterial = new THREE.MeshStandardMaterial( { color: 0x808080, roughness: 1, metalness: 0 } );
         let stageMesh = new THREE.Mesh( stage, stageMaterial );
-        stageMesh.position.set(-26, 3, 0);
+        stageMesh.position.set(-15, 2, 0);
         this.add(stageMesh);
     }
 
     addScenePanel() {
-        const geometry = new THREE.CylinderGeometry(1, 1, 50, 15, 10, false, 0, Math.PI);
-        const material = new THREE.MeshStandardMaterial( { color: 0x444444, roughness: 10, metalness: 0 } );
+        const geometry = new THREE.CylinderGeometry(1, 1, 50, 5, 5, false, 0, Math.PI);
+        const material = new THREE.MeshStandardMaterial( { color: 0x444444, roughness: 0, metalness: 0 } );
         let mesh = new THREE.Mesh(geometry, material);
         mesh.position.set(-30, 24, 0);
         mesh.rotateX(Math.PI/2);

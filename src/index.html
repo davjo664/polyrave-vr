@@ -17,6 +17,9 @@
     <meta charset="utf-8">
     <title>Three.js + WebVR</title>
     <style>
+      body {
+        background: black;
+      }
       #appContainer {
         visibility: hidden;
         opacity: 0;
@@ -26,6 +29,8 @@
       #introSceneContainer {
         visibility: visible;
         opacity: 1;
+        transition: visibility 0s, opacity 3s linear;
+        -webkit-transition: visibility 0s, opacity 3s linear;
       }
     </style>
 </head>
