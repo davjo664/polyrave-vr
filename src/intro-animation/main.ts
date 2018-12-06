@@ -48,9 +48,9 @@ export class Intro {
         this.player = new Player(this.scene, this.camera);
         this.player.position.y = 3;
 
-        const goal = new THREE.Vector3(10, 3, 18);
-        const animationDuration = 10000;
-        this.player.setEndPos(goal, animationDuration);
+        //const goal = new THREE.Vector3(10, 3, 18);
+        //const animationDuration = 10000;
+        //this.player.setEndPos(goal, animationDuration);
 
         //this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 40);
         //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');

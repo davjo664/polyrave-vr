@@ -11,10 +11,16 @@ function init() {
 	const intro = new Intro(introSceneContainer);
 
 	setTimeout(() => {
-		intro.destroy();
+		introSceneContainer.style.opacity = '0';
+		setTimeout(() => {
+			intro.destroy();
+		}, 3000);
 		new Main(container);
-		container.style.visibility = 'visible';
-		container.style.opacity = '1';
+		setTimeout(() => {
+			container.style.visibility = 'visible';
+			container.style.opacity = '1';
+		}, 4000);
+
 	}, introDuration);
 }
 

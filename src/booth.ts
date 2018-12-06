@@ -44,7 +44,7 @@ export class Booth extends THREE.Group{
 
                         // scale
                         this.add( object );
-                        this.scale.setScalar( 18 / box.getSize(new THREE.Vector3()).length() );
+                        this.scale.setScalar( 25 / box.getSize(new THREE.Vector3()).length() );
 
                         object.children.forEach(obj => {
                             // console.log(obj);

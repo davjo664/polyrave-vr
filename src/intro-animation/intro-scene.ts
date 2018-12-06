@@ -14,16 +14,16 @@ export class IntroScene extends THREE.Scene {
         let axis = new THREE.AxesHelper(20)
         // this.add(axis);
 
-        const fogColor = 0x424242;
+        const fogColor = 0x222222;
         this.background = new THREE.Color(fogColor);
-        this.fog = new THREE.Fog(fogColor, 30, 150);
+        this.fog = new THREE.Fog(fogColor, 2, 80);
 
         // add lights
-        let light = new THREE.DirectionalLight(0xffffff, 0.7)
-        light.position.set(100, 100, 100)
+        let light = new THREE.DirectionalLight(0xffffff, 1.2)
+        light.position.set(-30, 30, -30)
         this.add(light)
 
-        let ambient = new THREE.HemisphereLight( 0xbbbbff, 0x886666, 0.75 );
+        let ambient = new THREE.HemisphereLight( 0xbbbbff, 0x886666, 0.25 );
         ambient.position.set( -0.5, 0.75, -1 );
         this.add( ambient );
 
@@ -31,23 +31,38 @@ export class IntroScene extends THREE.Scene {
         var loader = new THREE.FontLoader();
         loader.load( 'assets/fonts/helvetiker_bold.json', font => {
 
-            var geometry = new THREE.TextGeometry( 'Welcome', {
+            var geometry1 = new THREE.TextGeometry( 'PolyGig VR', {
                 font: font,
-                size: 3,
-                height: 3,
+                size: 2,
+                height: 2,
                 curveSegments: 3,
                 bevelEnabled: false,
                 bevelThickness: 10,
                 bevelSize: 8,
                 bevelSegments: 5
             } );
-            var material = new THREE.MeshStandardMaterial({ color: 'red' });
-            var textMesh = new THREE.Mesh(geometry, material);
+            var geometry2 = new THREE.TextGeometry( 'Loading scene...', {
+                font: font,
+                size: 1,
+                height: 1,
+                curveSegments: 3,
+                bevelEnabled: false,
+                bevelThickness: 10,
+                bevelSize: 8,
+                bevelSegments: 5
+            } );
+
+            var material1 = new THREE.MeshStandardMaterial({ color: 'red' });
+            var textMesh1 = new THREE.Mesh(geometry1, material1);
+            var textMesh2 = new THREE.Mesh(geometry2, material1);
 
             //Position the text
-            textMesh.position.set(35, 1, 50);
-            textMesh.rotateY(1.1*Math.PI);
-            this.add(textMesh);
+            textMesh1.position.set(15, 4, 15);
+            textMesh1.rotateY(1.1*Math.PI);
+            this.add(textMesh1);
+            textMesh2.position.set(15, 1, 15);
+            textMesh2.rotateY(1.1*Math.PI);
+            this.add(textMesh2);
         } );
 
         // Add ground
@@ -78,7 +93,7 @@ export class IntroScene extends THREE.Scene {
         // Grass
         const grassRadius = 80;
         const numberOfGrassTushes = 6000;
-        const grass = new Grass(this, grassRadius, numberOfGrassTushes);
+        //const grass = new Grass(this, grassRadius, numberOfGrassTushes);
 
         let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
         groundMesh.translateY(-0.5);
