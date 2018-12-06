@@ -16,7 +16,7 @@ export class IntroScene extends THREE.Scene {
 
         const fogColor = 0x222222;
         this.background = new THREE.Color(fogColor);
-        this.fog = new THREE.Fog(fogColor, 30, 150);
+        this.fog = new THREE.Fog(fogColor, 2, 80);
 
         // add lights
         let light = new THREE.DirectionalLight(0xffffff, 1.2)
@@ -60,7 +60,7 @@ export class IntroScene extends THREE.Scene {
             textMesh1.position.set(15, 4, 15);
             textMesh1.rotateY(1.1*Math.PI);
             this.add(textMesh1);
-            textMesh2.position.set(15, 2, 15);
+            textMesh2.position.set(15, 1, 15);
             textMesh2.rotateY(1.1*Math.PI);
             this.add(textMesh2);
         } );
@@ -93,7 +93,7 @@ export class IntroScene extends THREE.Scene {
         // Grass
         const grassRadius = 80;
         const numberOfGrassTushes = 6000;
-        const grass = new Grass(this, grassRadius, numberOfGrassTushes);
+        //const grass = new Grass(this, grassRadius, numberOfGrassTushes);
 
         let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
         groundMesh.translateY(-0.5);
