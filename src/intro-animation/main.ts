@@ -47,7 +47,7 @@ export class Intro {
         this.player = new Player(this.scene, this.camera);
         this.player.position.y = 3;
 
-        const goal = new THREE.Vector3(0, 3, 18);
+        const goal = new THREE.Vector3(10, 3, 18);
         const animationDuration = 10000;
         this.player.setEndPos(goal, animationDuration);
 

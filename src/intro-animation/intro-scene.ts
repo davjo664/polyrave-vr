@@ -33,8 +33,8 @@ export class IntroScene extends THREE.Scene {
 
             var geometry = new THREE.TextGeometry( 'Welcome', {
                 font: font,
-                size: 10,
-                height: 5,
+                size: 3,
+                height: 3,
                 curveSegments: 3,
                 bevelEnabled: false,
                 bevelThickness: 10,
@@ -61,6 +61,7 @@ export class IntroScene extends THREE.Scene {
         } );
         
 
+        /*
         let ground = new ModelLoader("../assets/models/ground.obj","../assets/models/ground.mtl", 400);   
         this.add(ground);
         ground.position.set(40, -5, 25);
@@ -68,6 +69,11 @@ export class IntroScene extends THREE.Scene {
         let trees = new ModelLoader("../assets/models/trees.obj","../assets/models/trees.mtl", 400);
         this.add(trees);
         trees.position.set(40, 0, 25);
+        */
+
+        let ally = new ModelLoader("../assets/models/alle.obj","../assets/models/trees.mtl", 400);
+        this.add(ally);
+        ally.position.set(-20, 0, 0);
 
         // Grass
         const grassRadius = 80;
