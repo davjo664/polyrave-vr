@@ -24,6 +24,7 @@ export class Intro {
     private ambientAudio: FOAmbisonics;
     private mouse: any = {x:0, y:0};
     private stats: any;
+    private animationFrameId: any;
     constructor(container) {
 
         // // the HTML container
@@ -59,33 +60,9 @@ export class Intro {
 
         // Listeners
         document.addEventListener('DOMContentLoaded', () => this.updateSize(), false);
-        window.addEventListener('resize', () => this.updateSize(), false);
         
         this.render()
 
-        container.addEventListener( 'mousemove', (event) => this.onMouseMove(event), false );
-
-        // For testing in browser
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowLeft") {
-                this.camera.rotation.y += 0.5
-            }
-            else if (event.key === "ArrowRight") {
-                this.camera.rotation.y -= 0.5
-            } else if (event.key === "ArrowUp") {
-                this.camera.rotation.x += 0.5
-            } else if (event.key === "ArrowDown") {
-                this.camera.rotation.x -= 0.5
-            }
-        });
-
-        //let c = new ModelLoader("../assets/models/test.obj","../assets/models/test.mtl", 10);
-        //this.scene.add(c);
-        /////////////////
-
-        // load fbx model and texture    
-        //this.scene.importStaticFBXModel("../assets/models/scene.FBX");      
-    
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
     
@@ -100,14 +77,26 @@ export class Intro {
         this.stats.update();
 
         this.renderer.render(this.scene, this.camera)
-        requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
+        this.animationFrameId = requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
     }
 
-    onMouseMove( event ) {
-        // For testing in browser
-        event.preventDefault();
-        this.mouse.x = ( event.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
-        this.mouse.y = - ( event.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
+    destroy() {
+        var element = document. getElementById('introSceneContainer');
+        element.parentNode.removeChild(element);
+        cancelAnimationFrame(this.animationFrameId);
+        this.scene.children.forEach((child: THREE.Mesh) => {
+            if (child.isMesh) {
+                child.geometry.dispose();
+                // @ts-ignore: Unreachable code error
+                child.material.dispose();
+                this.scene.remove(child);
+            }
+        })
+        this.scene = null;
+        this.camera = null;
+        this.player = null;
+        this.renderer = null;
+        this.stats = null;
     }
 }
     

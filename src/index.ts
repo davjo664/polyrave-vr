@@ -8,11 +8,11 @@ function init() {
 	const introSceneContainer = document.getElementById('introSceneContainer');
 	const introDuration = 10000;
 
-	new Intro(introSceneContainer);
-	new Main(container);
+	const intro = new Intro(introSceneContainer);
 
 	setTimeout(() => {
-		introSceneContainer.style.display = 'none';
+		intro.destroy();
+		new Main(container);
 		container.style.visibility = 'visible';
 		container.style.opacity = '1';
 	}, introDuration);
