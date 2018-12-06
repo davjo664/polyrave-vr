@@ -43,17 +43,6 @@ export class PositionalAudio {
             }
         );
 
-        // create an object for the sound to play from
-        // Make this transparent when positioning is complete
-        let sphere = new THREE.BoxGeometry( 1, 3, 2 );
-        const material = new THREE.MeshPhongMaterial( { color: 0xff2200 } );
-        // let leftSpeaker = new THREE.Mesh( sphere, material );
-        // let rightSpeaker = new THREE.Mesh( sphere, material );
-
-        // // TESTING TESTING //
-        // let a = new Poly('fhFGDsv5jje');
-        // this.scene.add(a);
-
         let leftSpeaker = new Speaker();
         let rightSpeaker = new Speaker();
 
