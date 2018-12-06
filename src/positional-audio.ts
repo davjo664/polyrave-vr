@@ -23,7 +23,7 @@ export class PositionalAudio {
 
         // load a resource
         audioLoader.load(
-            '../assets/audio/' + audioName,
+            'assets/audio/' + audioName,
             (function ( audioBuffer ) {
                 // set the audio object buffer to the loaded object
                 audioLeft.setBuffer( audioBuffer );
