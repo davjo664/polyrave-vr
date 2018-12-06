@@ -18,15 +18,18 @@ export class Scene extends THREE.Scene {
 
         this.background = new THREE.Color( 0x222222 );
 
+        const fogColor = 0x000;
+        // this.fog = new THREE.Fog(fogColor, 40, 100);
+
         //this.add( new THREE.GridHelper( 100, 100 ) );
 
         // add lights
         let light = new THREE.DirectionalLight(0xffffff, 0.7)
         light.position.set(100, 100, 100)
-        this.add(light)
+        // this.add(light)
 
 
-        let ambient = new THREE.HemisphereLight( 0xbbbbff, 0x886666, 0.75 );
+        let ambient = new THREE.HemisphereLight( 0xbbbbff, 0x886666, 0.5 );
         ambient.position.set( -0.5, 0.75, -1 );
         this.add( ambient );
 
@@ -52,7 +55,7 @@ export class Scene extends THREE.Scene {
         const groundGeometry = new THREE.BoxGeometry(groundWidth, 0.5, groundDepth);
         // let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true} );
         var floorMaterial = new THREE.MeshStandardMaterial( { 
-            color: 'rgb(3, 76, 2)', roughness: 0, metalness: 0
+            color: 'rgb(3, 76, 2)', roughness: 1, metalness: 1
         } );
         
 
@@ -67,7 +70,7 @@ export class Scene extends THREE.Scene {
         // Grass
         const grassRadius = 80;
         const numberOfGrassTushes = 6000;
-        const grass = new Grass(this, grassRadius, numberOfGrassTushes);
+        // const grass = new Grass(this, grassRadius, numberOfGrassTushes);
 
         let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
         groundMesh.translateY(-0.5);
