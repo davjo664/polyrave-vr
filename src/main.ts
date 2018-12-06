@@ -64,9 +64,9 @@ export class Main {
 
         // Add scene light beams 
         // constructor: scene, xyz position, color, animation path
-        var path1 = (angle) => { return new THREE.Vector3(8 * Math.cos(angle), 0, 6 * Math.sin(angle)) };
-        var path2 = (angle) => { return new THREE.Vector3(-6 * Math.cos(angle), 0, -8 * Math.sin(angle)) };
-        var path3 = (angle) => { return new THREE.Vector3(2 * Math.cos(angle), 0, -2 * Math.sin(angle)) };
+        var path1 = (angle) => { return new THREE.Vector3(13 * Math.cos(angle), 0, 11 * Math.sin(angle)) };
+        var path2 = (angle) => { return new THREE.Vector3(-10 * Math.cos(angle), 0, -12 * Math.sin(angle)) };
+        var path3 = (angle) => { return new THREE.Vector3(7 * Math.cos(angle), 0, -7 * Math.sin(angle)) };
         this.volumetricLight1 = new VolumetricLight(this.scene, -30, 24, -20, 'blue', path1);
         this.volumetricLight2 = new VolumetricLight(this.scene, -30, 24, 0, 'lightblue', path2);
         this.volumetricLight3 = new VolumetricLight(this.scene, -30, 24, 20, 'blue', path3);
