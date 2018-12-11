@@ -86,7 +86,7 @@ export class IntroScene extends THREE.Scene {
         trees.position.set(40, 0, 25);
         */
 
-        let ally = new ModelLoader("assets/models/alle.obj","assets/models/trees.mtl", 400);
+        let ally = new ModelLoader("assets/models/optalle.obj","assets/models/trees.mtl", 400);
         this.add(ally);
         ally.position.set(-20, 0, 0);
 

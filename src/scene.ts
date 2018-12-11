@@ -49,23 +49,21 @@ export class Scene extends THREE.Scene {
         */
 
         // Add ground
-        let groundWidth = 220;
-        let groundDepth = 250;
+        let groundWidth = 300;
+        let groundDepth = 300;
         
         const groundGeometry = new THREE.BoxGeometry(groundWidth, 0.5, groundDepth);
-        // let groundMaterial = new THREE.MeshLambertMaterial( {color: 'gray', transparent: true} );
-        var floorMaterial = new THREE.MeshStandardMaterial( { 
-            color: 'rgb(3, 76, 2)', roughness: 1, metalness: 1
-        } );
-        
+        var floorMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 
-        let ground = new ModelLoader("assets/models/ground.obj","assets/models/ground.mtl", 400);   
-        this.add(ground);
-        ground.position.set(40, -5, 25);
+        const groundGeometry2 = new THREE.BoxGeometry(800, 0.5, 800);
+        let groundMesh2 = new THREE.Mesh( groundGeometry2, new THREE.MeshStandardMaterial( { 
+            color: 'rgb(3, 76, 2)', roughness: 1, metalness: 1
+        }));
+        this.add(groundMesh2);
         
-        let trees = new ModelLoader("assets/models/trees.obj","assets/models/trees.mtl", 400);
+        let trees = new ModelLoader("assets/models/optskog.obj","assets/models/trees.mtl", 400);
         this.add(trees);
-        trees.position.set(40, 0, 25);
+        trees.position.set(40, -2, 25);
 
         // Grass
         const grassRadius = 80;
@@ -74,6 +72,8 @@ export class Scene extends THREE.Scene {
 
         let groundMesh = new THREE.Mesh( groundGeometry, floorMaterial );
         groundMesh.translateY(-0.5);
+        groundMesh.translateX(50);
+        groundMesh.translateZ(20);
         groundMesh.name = "ground";
         this.add(groundMesh);
 
