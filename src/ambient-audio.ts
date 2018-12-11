@@ -6,7 +6,7 @@ export class FOAmbisonics {
         // Set up an audio element to feed the ambisonic source audio feed.
         // Input audio should contain 4 channels (foa)
         var audioElement = document.createElement('audio');
-        audioElement.src = '../assets/audio/' + audioName;
+        audioElement.src = 'assets/audio/' + audioName;
 
         // Create AudioContext, MediaElementSourceNode and FOARenderer.
         var audioContext = new AudioContext();
