@@ -85,7 +85,7 @@ export class Scene extends THREE.Scene {
 
     addStage() {
         const stage = new THREE.BoxGeometry(30, 4, 70);
-        var stageMaterial = new THREE.MeshStandardMaterial( { color: 0x808080, roughness: 1, metalness: 0 } );
+        var stageMaterial = new THREE.MeshStandardMaterial( { color: 0x808080, roughness: 0, metalness: 0 } );
         let stageMesh = new THREE.Mesh( stage, stageMaterial );
         stageMesh.position.set(-15, 2, 0);
         this.add(stageMesh);

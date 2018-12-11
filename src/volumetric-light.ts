@@ -107,7 +107,7 @@ export class VolumetricLight {
 
         // Light source mesh
         const sourceGeometry = new THREE.SphereGeometry(1.3, 5, 5);
-        const sourceMaterial = new THREE.MeshPhongMaterial( { color: color } );
+        const sourceMaterial = new THREE.MeshPhongMaterial( { emissive: color, emissiveIntensity: 10 } );
         this.lightSourceMesh = new THREE.Mesh(sourceGeometry, sourceMaterial);
         this.lightSourceMesh.position.copy(this.lightMesh.position);
         scene.add(this.lightSourceMesh);
