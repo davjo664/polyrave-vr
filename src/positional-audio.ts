@@ -27,10 +27,10 @@ export class PositionalAudio {
             (function ( audioBuffer ) {
                 // set the audio object buffer to the loaded object
                 audioLeft.setBuffer( audioBuffer );
-                audioLeft.setRefDistance( 20 );
+                audioLeft.setRefDistance( 15 );
                 audioLeft.setLoop(true);
                 audioRight.setBuffer( audioBuffer );
-                audioRight.setRefDistance( 20 );
+                audioRight.setRefDistance( 15 );
                 audioRight.setLoop(true);
                 audioLeft.play();
                 audioRight.play();

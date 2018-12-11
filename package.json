@@ -37,6 +37,7 @@
     "three": "latest",
     "three-fbx-loader": "^1.0.3",
     "three-obj-mtl-loader": "^1.0.3",
-    "three-text2d": "^0.4.1"
+    "three-text2d": "^0.4.1",
+    "web-audio-touch-unlock": "^1.0.1"
   }
 }
