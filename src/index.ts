@@ -9,7 +9,7 @@ function init() {
 	const introDuration = 10000;
 
 	const intro = new Intro(introSceneContainer);
-
+	
 	setTimeout(() => {
 		introSceneContainer.style.opacity = '0';
 		setTimeout(() => {

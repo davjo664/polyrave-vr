@@ -75,6 +75,6 @@ export class PositionalAudio {
         }
 
         // Return frequency average
-        return (sum/lowFrequenciesEnd)/100;
+        return (sum/lowFrequenciesEnd)/200;
     }
 }

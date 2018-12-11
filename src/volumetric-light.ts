@@ -95,7 +95,10 @@ export class VolumetricLight {
         // Light beam mesh
         gg.applyMatrix( new THREE.Matrix4().makeTranslation( 0, -gg.parameters.height/2, 0 ) );
         gg.applyMatrix( new THREE.Matrix4().makeRotationX( -Math.PI / 2 ) );
-        this.lightMesh = new THREE.Mesh( gg, mm );
+
+        // Low quality material instead of shader material
+        var mm2 = new THREE.MeshLambertMaterial({ color: color, transparent: true, opacity: 0.2 });
+        this.lightMesh = new THREE.Mesh( gg, mm2 );
         this.lightMesh.position.set(x, y, z);
         this.lightMesh.lookAt(new THREE.Vector3(0, 0, 0));
         mm.uniforms.lightColor.value.set( color );
@@ -119,7 +122,7 @@ export class VolumetricLight {
         this.light.angle = Math.PI/5;
         this.light.intensity = 2;
         scene.add( this.light );
-        // scene.add( this.light.target );
+        scene.add( this.light.target );
         
     }
 

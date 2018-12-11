@@ -84,7 +84,7 @@ export class Main {
         this.crosshair.position.z = -4;
         this.camera.add( this.crosshair );
         this.clock = new THREE.Clock();
-        this.dancer = new Dancer(this.scene);
+        //this.dancer = new Dancer(this.scene);
         
         // Initial size update set to canvas container
         this.updateSize();
@@ -167,7 +167,7 @@ export class Main {
              this.crosshair.material.opacity = 0;
         }
 
-        this.dancer.update(this.clock.getDelta());
+        //this.dancer.update(this.clock.getDelta());
 
         this.renderer.render(this.scene, this.camera)
         requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
