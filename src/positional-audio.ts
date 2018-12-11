@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { Speaker } from './speaker';
+import webAudioTouchUnlock from 'web-audio-touch-unlock';
 
 export class PositionalAudio { 
     private analyser: THREE.AudioAnalyser;
@@ -21,6 +22,9 @@ export class PositionalAudio {
         // load a sound and set it as the PositionalAudio object's buffer
         var audioLoader = new THREE.AudioLoader();
 
+        // @ts-ignore: Unreachable code error
+	var context = new (window.AudioContext || window.webkitAudioContext)();
+
         // load a resource
         audioLoader.load(
             'assets/audio/' + audioName,
@@ -32,8 +36,22 @@ export class PositionalAudio {
                 audioRight.setBuffer( audioBuffer );
                 audioRight.setRefDistance( 15 );
                 audioRight.setLoop(true);
-                audioLeft.play();
-                audioRight.play();
+                webAudioTouchUnlock(context)
+                .then(function (unlocked) {
+                    if(unlocked) {
+                        console.log("need");
+                        audioLeft.play();
+                        audioRight.play();
+                        // AudioContext was unlocked from an explicit user action, sound should start playing now
+                    } else {
+                        console.log("no need");
+                        audioLeft.play();
+                        audioRight.play();
+                        // There was no need for unlocking, devices other than iOS
+                    }
+                }, function(reason) {
+                    console.error(reason);
+                });
             }),
             function ( xhr ) {
                 console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
