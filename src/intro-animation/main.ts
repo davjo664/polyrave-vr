@@ -53,7 +53,7 @@ export class Intro {
         //this.player.setEndPos(goal, animationDuration);
 
         //this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 40);
-        //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
+        this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
 
         // Initial size update set to canvas container
         this.updateSize();

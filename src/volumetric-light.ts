@@ -119,7 +119,7 @@ export class VolumetricLight {
         this.light.angle = Math.PI/5;
         this.light.intensity = 2;
         scene.add( this.light );
-        scene.add( this.light.target );
+        // scene.add( this.light.target );
         
     }
 

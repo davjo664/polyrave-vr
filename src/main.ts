@@ -60,7 +60,7 @@ export class Main {
         this.player.rotateY(1.4*Math.PI);
 
         this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 60);
-        //this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
+        this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
 
         // Add scene light beams 
         // constructor: scene, xyz position, color, animation path

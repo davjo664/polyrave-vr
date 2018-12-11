@@ -8,6 +8,7 @@ export default class Dancer {
         loader.load( 'assets/models/samba.fbx', ( object:THREE.Group ) => {
             object.scale.set(0.05,0.05,0.05);
             object.position.setY(1);
+            object.position.setX(10);
             console.log("OBJ");
             console.log(object);
             this.mixer = new THREE.AnimationMixer( object );
