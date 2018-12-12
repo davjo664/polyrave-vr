@@ -2,9 +2,13 @@ import * as THREE from 'three'
 import { Speaker } from './speaker';
 import webAudioTouchUnlock from 'web-audio-touch-unlock';
 
+
 export class PositionalAudio { 
     private analyser: THREE.AudioAnalyser;
-
+    private audioLeft: THREE.PositionalAudio;
+    private audioRight: THREE.PositionalAudio;
+    private loaded: boolean = false;
+    private audioUnlocked: boolean = false;
     constructor(scene, camera, audioName, distance) {        
 
         // create an AudioListener and add it to the camera
@@ -12,46 +16,60 @@ export class PositionalAudio {
         camera.add( listener );
 
         // create the PositionalAudio object (passing in the listener)
-        let audioLeft = new THREE.PositionalAudio( listener );
-        let audioRight = new THREE.PositionalAudio( listener );
+        this.audioLeft = new THREE.PositionalAudio( listener );
+        this.audioRight = new THREE.PositionalAudio( listener );
 
         // Create analyser to analyse song frequencies
         // We only need to analyse one audio since they play the same song
-        this.analyser = new THREE.AudioAnalyser(audioLeft, 512*2);
+        this.analyser = new THREE.AudioAnalyser(this.audioLeft, 512*2);
 
         // load a sound and set it as the PositionalAudio object's buffer
         var audioLoader = new THREE.AudioLoader();
 
-        // @ts-ignore: Unreachable code error
-	var context = new (window.AudioContext || window.webkitAudioContext)();
+        var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+        if (iOS) {
+            // @ts-ignore: Unreachable code error
+            var context = new (window.AudioContext || window.webkitAudioContext)();
+            webAudioTouchUnlock(context)
+            .then((unlocked) => {
+                if(unlocked) {
+                    console.log("need");
+                    // AudioContext was unlocked from an explicit user action, sound should start playing now
+                } else {
+                    console.log("no need");
+                    // There was no need for unlocking, devices other than iOS
+                }
+                this.audioUnlocked = true;
+                if(this.loaded) {
+                    console.log("PLAY: IS LOADED")
+                    this.audioLeft.play();
+                    this.audioRight.play();
+                    // this.ambientAudio.startAudio();
+                }
+            }, function(reason) {
+                console.error(reason);
+            });
+        }
+
+        
 
         // load a resource
         audioLoader.load(
             'assets/audio/' + audioName,
-            (function ( audioBuffer ) {
+            (( audioBuffer ) => {
+                this.audioLeft.setBuffer( audioBuffer );
+                this.audioLeft.setRefDistance( 15 );
+                this.audioLeft.setLoop(true);
+                this.audioRight.setBuffer( audioBuffer );
+                this.audioRight.setRefDistance( 15 );
+                this.audioRight.setLoop(true);  
                 // set the audio object buffer to the loaded object
-                audioLeft.setBuffer( audioBuffer );
-                audioLeft.setRefDistance( 15 );
-                audioLeft.setLoop(true);
-                audioRight.setBuffer( audioBuffer );
-                audioRight.setRefDistance( 15 );
-                audioRight.setLoop(true);
-                webAudioTouchUnlock(context)
-                .then(function (unlocked) {
-                    if(unlocked) {
-                        console.log("need");
-                        audioLeft.play();
-                        audioRight.play();
-                        // AudioContext was unlocked from an explicit user action, sound should start playing now
-                    } else {
-                        console.log("no need");
-                        audioLeft.play();
-                        audioRight.play();
-                        // There was no need for unlocking, devices other than iOS
-                    }
-                }, function(reason) {
-                    console.error(reason);
-                });
+                this.loaded = true;
+                if(!iOS || this.audioUnlocked) {
+                    console.log("PLAY: IS UNLOCKED")
+                    this.audioLeft.play();
+                    this.audioRight.play();
+                }
             }),
             function ( xhr ) {
                 console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
@@ -77,8 +95,8 @@ export class PositionalAudio {
         scene.add( rightSpeaker );
 
         // Add the sound to the meshes
-        leftSpeaker.add( audioLeft );
-        rightSpeaker.add( audioRight );
+        leftSpeaker.add( this.audioLeft );
+        rightSpeaker.add( this.audioRight );
 
     }
 
