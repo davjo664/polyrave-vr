@@ -16,6 +16,7 @@ var WEBVR = {
 		}
 
 		function showEnterVR( device ) {
+			device.requestPresent( [ { source: renderer.domElement } ] );
 
 			button.style.display = '';
 
