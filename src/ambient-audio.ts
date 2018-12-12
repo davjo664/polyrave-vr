@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import webAudioTouchUnlock from 'web-audio-touch-unlock';
 
 export class FOAmbisonics { 
     constructor(audioName) {  
@@ -21,19 +20,7 @@ export class FOAmbisonics {
             audioElementSource.connect(foaRenderer.input);
             foaRenderer.output.connect(audioContext.destination);
             audioElement.volume = 0.3;
-            webAudioTouchUnlock(audioContext)
-                .then(function (unlocked) {
-                    if(unlocked) {
-                        console.log("need ambient");
-                        // AudioContext was unlocked from an explicit user action, sound should start playing now
-                    } else {
-                        console.log("no need ambient");
-                        // There was no need for unlocking, devices other than iOS
-                    }
-                    audioElement.play();
-                }, function(reason) {
-                    console.error(reason);
-                });
+            audioElement.play();
         });
     }
 }
