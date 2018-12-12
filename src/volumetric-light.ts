@@ -97,7 +97,7 @@ export class VolumetricLight {
         gg.applyMatrix( new THREE.Matrix4().makeRotationX( -Math.PI / 2 ) );
 
         // Low quality material instead of shader material
-        var mm2 = new THREE.MeshLambertMaterial({ color: color, transparent: true, opacity: 0.2 });
+        var mm2 = new THREE.MeshLambertMaterial({ color: color, transparent: true, opacity: 0.3 });
         this.lightMesh = new THREE.Mesh( gg, mm2 );
         this.lightMesh.position.set(x, y, z);
         this.lightMesh.lookAt(new THREE.Vector3(0, 0, 0));
