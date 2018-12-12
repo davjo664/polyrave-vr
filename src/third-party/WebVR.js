@@ -16,26 +16,27 @@ var WEBVR = {
 		}
 
 		function showEnterVR( device ) {
+			renderer.vr.setDevice( device );
 			device.requestPresent( [ { source: renderer.domElement } ] );
 
-			button.style.display = '';
+			// button.style.display = 'none';
 
-			button.style.cursor = 'pointer';
-			button.style.left = 'calc(50% - 50px)';
-			button.style.width = '100px';
+			// button.style.cursor = 'pointer';
+			// button.style.left = 'calc(50% - 50px)';
+			// button.style.width = '100px';
 
-			button.textContent = 'ENTER VR';
+			// button.textContent = 'ENTER VR';
 
-			button.onmouseenter = function () { button.style.opacity = '1.0'; };
-			button.onmouseleave = function () { button.style.opacity = '0.5'; };
+			// button.onmouseenter = function () { button.style.opacity = '1.0'; };
+			// button.onmouseleave = function () { button.style.opacity = '0.5'; };
 
-			button.onclick = function () {
+			// button.onclick = function () {
 
-				device.isPresenting ? device.exitPresent() : device.requestPresent( [ { source: renderer.domElement } ] );
+			// 	device.isPresenting ? device.exitPresent() : device.requestPresent( [ { source: renderer.domElement } ] );
 
-			};
+			// };
 
-			renderer.vr.setDevice( device );
+			// renderer.vr.setDevice( device );
 
 		}
 
@@ -67,7 +68,7 @@ var WEBVR = {
 
 			//
 
-			button.style.display = '';
+			button.style.display = 'none';
 
 			button.style.cursor = 'pointer';
 			button.style.left = 'calc(50% - 50px)';
@@ -98,7 +99,7 @@ var WEBVR = {
 
 		function showVRNotFound() {
 
-			button.style.display = '';
+			button.style.display = 'none';
 
 			button.style.cursor = 'auto';
 			button.style.left = 'calc(50% - 75px)';
