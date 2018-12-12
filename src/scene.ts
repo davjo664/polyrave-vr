@@ -1,6 +1,7 @@
 // three.js
 import * as THREE from 'three'
 import * as FBXLoader from 'three-fbx-loader'
+import webAudioTouchUnlock from 'web-audio-touch-unlock';
 import { OBJLoader } from 'three-obj-mtl-loader'
 import { Booth } from './booth'
 import { Grass } from './grass'
@@ -9,6 +10,7 @@ import { ModelLoader } from './model-loader'
 export class Scene extends THREE.Scene {
     private rectLight: any;
     private rectLightMesh: any;
+    private textMesh: THREE.Mesh;
     constructor() {
         super();
 
@@ -81,6 +83,12 @@ export class Scene extends THREE.Scene {
         this.addDJBooth();
         this.addBackgroundScreen();
         this.addScenePanel();
+
+        // Only add text on iOS devices
+        const isIOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+        if (isIOS) {
+            this.addInfoText();
+        }
     }
 
     addStage() {
@@ -135,6 +143,45 @@ export class Scene extends THREE.Scene {
         let DjTable = new Booth();
         DjTable.position.set(-20, 4, 0);
         this.add( DjTable );
+    }
+
+    // Add info text on iOS devices
+    // User need to click to start audio (auto audio play disabled)
+    addInfoText() {
+        // Add intro-text
+        var loader = new THREE.FontLoader();
+        loader.load( 'assets/fonts/helvetiker_bold.json', font => {
+
+            var geometry = new THREE.TextGeometry( 'Press to start \n     the gig!', {
+                font: font,
+                size: 3,
+                height: 1.5,
+                curveSegments: 3,
+                bevelEnabled: false,
+                bevelThickness: 10,
+                bevelSize: 8,
+                bevelSegments: 5
+            } );
+
+            var material = new THREE.MeshStandardMaterial({ emissive: 'red', emissiveIntensity: 0.7 });
+            this.textMesh = new THREE.Mesh(geometry, material);
+
+            //Position the text
+            this.textMesh.position.set(85, 6, 80);
+            this.textMesh.rotateY(0.4*Math.PI);
+            this.add(this.textMesh);
+
+        } );
+
+        // @ts-ignore: Unreachable code error
+        var context = new (window.AudioContext || window.webkitAudioContext)();
+        webAudioTouchUnlock(context)
+        .then(() => {
+            this.remove(this.textMesh);       
+        }, function(reason) {
+            console.error(reason);
+        });
+        
     }
 
 }
