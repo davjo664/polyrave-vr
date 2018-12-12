@@ -13,7 +13,7 @@ import { FOAmbisonics } from './ambient-audio';
 import { VolumetricLight } from './volumetric-light';
 import { Arrow } from './arrow';
 import { ModelLoader } from './model-loader';
-import Dancer from './dancer';
+import DiscJockey from './dj';
 
 export class Main {
     private scene: Scene;
@@ -33,7 +33,7 @@ export class Main {
     private arrow: Arrow;
     private walkTimer: number = 0.0;
     private clock: THREE.Clock;
-    private dancer: Dancer;
+    private DJ: DiscJockey;
     constructor(container) {
 
         // // the HTML container
@@ -84,7 +84,8 @@ export class Main {
         this.crosshair.position.z = -4;
         this.camera.add( this.crosshair );
         this.clock = new THREE.Clock();
-        //this.dancer = new Dancer(this.scene);
+
+        this.DJ = new DiscJockey(this.scene);
         
         // Initial size update set to canvas container
         this.updateSize();
@@ -114,16 +115,12 @@ export class Main {
         this.arrow = new Arrow();
         this.scene.add( this.arrow );
 
-        var dj = new Poly('73ky2Ggv_r_');
-        dj.position.set(-25, 3, 0);
-        this.scene.add(dj);
+        // Load DJ with animation and textures
+        //this.scene.addDJ("../assets/models/DJ/lumberJack.fbx"); 
 
         //let c = new ModelLoader("../assets/models/test.obj","../assets/models/test.mtl", 10);
         //this.scene.add(c);
-        /////////////////
-
-        // load fbx model and texture    
-        //this.scene.importStaticFBXModel("../assets/models/scene.FBX");      
+        /////////////////     
     
         // Hide loading text
         this.container.querySelector('#loading').style.display = 'none';
@@ -167,7 +164,7 @@ export class Main {
              this.crosshair.material.opacity = 0;
         }
 
-        //this.dancer.update(this.clock.getDelta());
+        this.DJ.update(this.clock.getDelta());
 
         this.renderer.render(this.scene, this.camera)
         requestAnimationFrame(this.render.bind(this)); // Bind the main class instead of window object
