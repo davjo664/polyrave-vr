@@ -23,7 +23,7 @@ export class PositionalAudio {
         var audioLoader = new THREE.AudioLoader();
 
         // @ts-ignore: Unreachable code error
-	var context = new (window.AudioContext || window.webkitAudioContext)();
+	    var context = new (window.AudioContext || window.webkitAudioContext)();
 
         // load a resource
         audioLoader.load(
@@ -40,15 +40,13 @@ export class PositionalAudio {
                 .then(function (unlocked) {
                     if(unlocked) {
                         console.log("need");
-                        audioLeft.play();
-                        audioRight.play();
                         // AudioContext was unlocked from an explicit user action, sound should start playing now
                     } else {
                         console.log("no need");
-                        audioLeft.play();
-                        audioRight.play();
                         // There was no need for unlocking, devices other than iOS
                     }
+                    audioLeft.play();
+                    audioRight.play();
                 }, function(reason) {
                     console.error(reason);
                 });
