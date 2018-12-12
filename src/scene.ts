@@ -128,6 +128,7 @@ export class Scene extends THREE.Scene {
         var rectLightMeshBack = new THREE.Mesh( new THREE.PlaneBufferGeometry(), new THREE.MeshBasicMaterial( { color: 0x080808 } ) );
         rectLightMeshBack.rotation.y = Math.PI;
         this.rectLightMesh.add( rectLightMeshBack );
+        this.updateLightIntensity(0.11);
     }
 
     updateLightIntensity(val) {
