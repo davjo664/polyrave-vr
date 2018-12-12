@@ -132,9 +132,14 @@ export class VolumetricLight {
         if (sound_intensity > 0.1) {
             this.light.intensity = 3 * sound_intensity;
             this.lightMesh.scale.set(1, sound_intensity, 1);
-        }
-        //Update direction of light beam
+        } 
+
         let angle = 0.05 * Math.PI * 2 * Date.now() / 100;
+        
+        // Minimize animation path when low sound intensity
+        if (sound_intensity < 0.3) angle *= 0.3;
+
+        //Update direction of light beam
         let target = this.animation(angle);
 		this.lightMesh.lookAt(target);
         this.light.target.position.copy(target);
