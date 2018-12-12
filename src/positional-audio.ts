@@ -17,7 +17,7 @@ export class PositionalAudio {
 
         // Create analyser to analyse song frequencies
         // We only need to analyse one audio since they play the same song
-        this.analyser = new THREE.AudioAnalyser(audioLeft, 512*4);
+        this.analyser = new THREE.AudioAnalyser(audioLeft, 512*2);
 
         // load a sound and set it as the PositionalAudio object's buffer
         var audioLoader = new THREE.AudioLoader();
@@ -93,6 +93,6 @@ export class PositionalAudio {
         }
 
         // Return frequency average
-        return (sum/lowFrequenciesEnd)/200;
+        return (sum/lowFrequenciesEnd) * 0.007;
     }
 }

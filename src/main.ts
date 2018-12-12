@@ -59,7 +59,7 @@ export class Main {
         this.player.position.set(130, 3, 90);
         this.player.rotateY(1.4*Math.PI);
 
-        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'deadmau5.mp3', 60);
+        this.positionalSceneAudio = new PositionalAudio(this.scene, this.camera, 'dance.mp3', 60);
         this.ambientAudio = new FOAmbisonics('forest_FOA.flac');
 
         // Add scene light beams 
@@ -143,7 +143,7 @@ export class Main {
         this.volumetricLight2.update(sound_intensity);
         this.volumetricLight3.update(sound_intensity);
 
-        this.scene.updateLightIntensity(sound_intensity/2);
+        this.scene.updateLightIntensity(sound_intensity * 0.5);
 
         this.raycaster.setFromCamera(this.renderer.vr.getDevice() ? {x: 0, y:0} : this.mouse, this.camera );
         var intersects = this.raycaster.intersectObject(this.scene.getObjectByName("ground"));

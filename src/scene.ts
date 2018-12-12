@@ -123,10 +123,11 @@ export class Scene extends THREE.Scene {
     }
 
     updateLightIntensity(val) {
+        if (val > 0.52) val = 0.6;
         if (val > 0.1) {
             this.rectLight.intensity = val;
             this.rectLightMesh.material.color.copy( this.rectLight.color ).multiplyScalar( this.rectLight.intensity );
-        }
+        } 
     }
 
     importStaticFBXModel(path) {
