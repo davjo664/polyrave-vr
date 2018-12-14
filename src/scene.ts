@@ -33,7 +33,7 @@ export class Scene extends THREE.Scene {
         // invert the geometry on the x-axis so that all of the faces point inward
         geometry.scale( - 1, 1, 1 );
         var material = new THREE.MeshBasicMaterial( {
-            map: new THREE.TextureLoader().load( '../assets/textures/sky.jpg' ) // equirectangular image
+            map: new THREE.TextureLoader().load( 'assets/textures/sky.jpg' ) // equirectangular image
         } );
         // material.side = THREE.BackSide;
         var mesh = new THREE.Mesh( geometry, material );
