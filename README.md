@@ -12,10 +12,9 @@
 
 [https://davjo664.github.io/polyrave-vr](https://davjo664.github.io/polyrave-vr)
 
-![img1](./images/IMG1.PNG | width=100)
-![img2](./images/IMG2.PNG | width=100)
-![img3](./images/IMG3.PNG | width=100)
-
+<img src="./images/IMG1.PNG" width="300" height="200" />
+<img src="./images/IMG2.PNG" width="300" height="200" />
+<img src="./images/IMG3.PNG" width="300" height="200" />
 
 ## Authors
 
