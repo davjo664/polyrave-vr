@@ -19,5 +19,7 @@
 ## Authors
 
 Jesper Lund
+
 David Johansson
+
 Tobias Pettersson
