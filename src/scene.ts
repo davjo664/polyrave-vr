@@ -146,7 +146,7 @@ export class Scene extends THREE.Scene {
         var loader = new THREE.FontLoader();
         loader.load( 'assets/fonts/helvetiker_bold.json', font => {
 
-            var geometry = new THREE.TextGeometry( 'Press to start \n     the gig!', {
+            var geometry = new THREE.TextGeometry( 'Press to start \n     the rave!', {
                 font: font,
                 size: 3,
                 height: 1.5,
