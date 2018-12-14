@@ -21,8 +21,13 @@ export class ModelLoader extends THREE.Group{
                 var box = new THREE.Box3();
                 box.setFromObject( object );
 
-                // re-center
+                // Add casting tree shadows
+                object.children.forEach((child) => {
+                    child.castShadow = true;
+                    child.receiveShadow = false;
+                });
 
+                // re-center
                 var center = box.getCenter(new THREE.Vector3());
                 center.y = box.min.y;
                 object.position.sub( center );
