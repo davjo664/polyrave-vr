@@ -90,6 +90,7 @@ export class Scene extends THREE.Scene {
         var stageMaterial = new THREE.MeshLambertMaterial( { color: 0x808080 } );
         let stageMesh = new THREE.Mesh( stage, stageMaterial );
         stageMesh.position.set(-15, 2, 0);
+        stageMesh.castShadow = true;
         this.add(stageMesh);
     }
 

@@ -121,7 +121,7 @@ export class VolumetricLight {
         this.light.shadow.radius = 3;
         this.light.penumbra = 0.6;
         this.light.angle = Math.PI/5;
-        this.light.intensity = 2;
+        this.light.intensity = 1;
         scene.add( this.light );
         scene.add( this.light.target );
         
