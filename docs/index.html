@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<script src='src/third-party/webvr-polyfill.js'></script>
+<script src="src/third-party/WebVR.js"></script>
+<script src="src/third-party/stats.min.js"></script>
+<script src='src/third-party/omnitone.js'></script>
+<script src="src/third-party/three.js"></script>
+<script src="src/third-party/inflate.min.js"></script>
+<script src="src/third-party/FBXLoader.js"></script>
+
+<script>
+  window.loader = new THREE.FBXLoader();
+</script>
+
+<style>
+html, body {margin: 0; height: 100%; overflow: hidden}
+</style>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Three.js + WebVR</title>
+    <style>
+      body {
+        background: black;
+      }
+      #appContainer {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 3s linear;
+        -webkit-transition: visibility 0s, opacity 3s linear;
+      }
+      #introSceneContainer {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0s, opacity 3s linear;
+        -webkit-transition: visibility 0s, opacity 3s linear;
+      }
+    </style>
+</head>
+
+<body>
+    <section id="introSceneContainer" class="main">
+        <div id="loading">Loading...</div>
+    </section>
+    <section id="appContainer" class="main">
+      <div id="loading">Loading...</div>
+    </section>
+  <script type="text/javascript" src="index.js"></script></body>
+
+</html>
