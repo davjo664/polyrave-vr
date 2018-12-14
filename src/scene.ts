@@ -37,7 +37,7 @@ export class Scene extends THREE.Scene {
         } );
         // material.side = THREE.BackSide;
         var mesh = new THREE.Mesh( geometry, material );
-        mesh.translateY(100);
+        mesh.translateY(20);
         this.add( mesh );
 
         // Add ground

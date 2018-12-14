@@ -3,7 +3,7 @@ import * as THREE from 'three'
 
 export class Camera extends THREE.PerspectiveCamera {
     constructor(aspectRatio) {
-        super(60, aspectRatio,0.01, 500);
+        super(60, aspectRatio,0.01, 600);
 
         // this.position.set( 50, 40, 50 );
         // this.lookAt( 0, 0, 0 );
