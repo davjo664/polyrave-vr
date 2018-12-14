@@ -1,23 +1,24 @@
-# Typescript Three.js Webpack Starter
+# PolyRave VR
+*The virtual forrest rave*
 
-- Typescript support.
+- Typescript
+- Node.js
+- WebVR
+- Three.js
 - Webpack
-- Html plugin
-- BrowserSync
+- Web Audio API
 
-## Usage
+## Demo
 
-### Install Typscript
+[https://davjo664.github.io/polyrave-vr](https://davjo664.github.io/polyrave-vr)
 
-```
-npm install typescript -g
-```
+![img1](./images/IMG1.PNG)
+![img2](./images/IMG2.PNG)
+![img3](./images/IMG3.PNG)
 
-### Start
 
-```
-$ git clone https://github.com/davjo664/threejs-web-vr
-$ cd threejs-web-vr
-$ npm install # or yarn
-$ npm start
-```
+## Authors
+
+Jesper Lund
+David Johansson
+Tobias Pettersson
