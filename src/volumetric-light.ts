@@ -118,6 +118,7 @@ export class VolumetricLight {
         this.light.position.copy(this.lightMesh.position);
         this.light.color = mm.uniforms.lightColor.value;
         this.light.castShadow = true;
+        this.light.shadow.radius = 3;
         this.light.penumbra = 0.6;
         this.light.angle = Math.PI/5;
         this.light.intensity = 2;

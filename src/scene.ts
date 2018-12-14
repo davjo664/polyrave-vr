@@ -23,14 +23,6 @@ export class Scene extends THREE.Scene {
         const fogColor = 0x000;
         // this.fog = new THREE.Fog(fogColor, 40, 100);
 
-        //this.add( new THREE.GridHelper( 100, 100 ) );
-
-        // add lights
-        let light = new THREE.DirectionalLight(0xffffff, 0.7)
-        light.position.set(100, 100, 100)
-        // this.add(light)
-
-
         let ambient = new THREE.HemisphereLight( 0xbbbbff, 0x886666, 0.5 );
         ambient.position.set( -0.5, 0.75, -1 );
         this.add( ambient );
@@ -56,10 +48,12 @@ export class Scene extends THREE.Scene {
         var floorMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 
         const groundGeometry2 = new THREE.BoxGeometry(800, 0.5, 800);
-        let groundMesh2 = new THREE.Mesh( groundGeometry2, new THREE.MeshStandardMaterial( { 
-            color: 'rgb(3, 76, 2)', roughness: 1, metalness: 1
+        let groundMesh2 = new THREE.Mesh( groundGeometry2, new THREE.MeshLambertMaterial( { 
+            color: 'rgb(3, 76, 2)'
         }));
         this.add(groundMesh2);
+        groundMesh2.receiveShadow = true;
+        groundMesh2.castShadow = false;
         
         let trees = new ModelLoader("assets/models/optskog.obj","assets/models/trees.mtl", 400);
         this.add(trees);
@@ -91,7 +85,7 @@ export class Scene extends THREE.Scene {
 
     addStage() {
         const stage = new THREE.BoxGeometry(30, 4, 70);
-        var stageMaterial = new THREE.MeshStandardMaterial( { color: 0x808080, roughness: 0, metalness: 0 } );
+        var stageMaterial = new THREE.MeshLambertMaterial( { color: 0x808080 } );
         let stageMesh = new THREE.Mesh( stage, stageMaterial );
         stageMesh.position.set(-15, 2, 0);
         this.add(stageMesh);

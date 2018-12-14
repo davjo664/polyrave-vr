@@ -16,6 +16,8 @@ export class Renderer extends THREE.WebGLRenderer
 
         this.vr.enabled = true;
 
+        this.shadowMapEnabled = true;
+
         // Add render view to container
         container.appendChild(this.domElement)
 
