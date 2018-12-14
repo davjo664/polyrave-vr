@@ -1,7 +1,7 @@
 # PolyRave VR
 *The virtual forrest rave*
 
-- Spatialized mono audio using equalpower panning for the music
+- 2 spatialized mono audio sources using equalpower panning for the music
 - First order ambisonics audio for the ambient sound
 - Fotographed 360 image using GoPro Fusion for the sky
 - Motion capture for the DJ animation
