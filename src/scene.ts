@@ -36,8 +36,7 @@ export class Scene extends THREE.Scene {
         this.add( ambient );
 
         // Add sky base 
-        /*
-        var geometry = new THREE.SphereBufferGeometry(sceneRadius,32,32, Math.PI );
+        var geometry = new THREE.SphereBufferGeometry(400,32,32, Math.PI );
 
         // invert the geometry on the x-axis so that all of the faces point inward
         geometry.scale( - 1, 1, 1 );
@@ -46,9 +45,8 @@ export class Scene extends THREE.Scene {
         } );
         // material.side = THREE.BackSide;
         var mesh = new THREE.Mesh( geometry, material );
-        mesh.translateY(18);
+        mesh.translateY(100);
         this.add( mesh );
-        */
 
         // Add ground
         let groundWidth = 300;
