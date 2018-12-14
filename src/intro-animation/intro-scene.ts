@@ -31,7 +31,7 @@ export class IntroScene extends THREE.Scene {
         var loader = new THREE.FontLoader();
         loader.load( 'assets/fonts/helvetiker_bold.json', font => {
 
-            var geometry1 = new THREE.TextGeometry( 'PolyGig VR', {
+            var geometry1 = new THREE.TextGeometry( 'PolyRave VR', {
                 font: font,
                 size: 2,
                 height: 2,
